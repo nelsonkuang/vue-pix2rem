@@ -1,0 +1,3 @@
+export const RECORD_USER_INFO = 'RECORD_USER_INFO'
+export const DELETE_USER_INFO = 'DELETE_USER_INFO'
+export const GET_USER_INFO = 'GET_USER_INFO'

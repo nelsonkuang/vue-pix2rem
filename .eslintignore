@@ -1,0 +1,6 @@
+/build/
+/config/
+/dist/
+/src/util/
+/*.js
+/test/unit/coverage/
