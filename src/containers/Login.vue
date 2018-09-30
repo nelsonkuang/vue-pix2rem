@@ -197,6 +197,7 @@ export default {
         if (counter > 1 && counter <= this.codeTime) { // 如果不到1分钟
           counter--
           this.verifiedCodeBtnText = counter + '秒'// 写入button
+          this.$apply()
           setTimeout(timer, 1000)
         } else {
           this.verifiedCodeBtnText = '重新获取' // 写入button
