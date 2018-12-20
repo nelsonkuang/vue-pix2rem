@@ -7,7 +7,8 @@
 export const getQueryString = function (name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
   var r = window.location.search.substr(1).match(reg);
-  if (r != null) return unescape(r[2]); return null;
+  if (r != null) return unescape(r[2]);
+  return null;
 }
 
 /**
@@ -83,14 +84,13 @@ export const goBack = function () {
  * @param {String} num
  * @return {Boolean}
  */
-export const isIdCardNo = function(num) {
+export const isIdCardNo = function (num) {
   var num = num.toUpperCase(),
     len = num.length,
     re;
   if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))) {
     return false;
-  }
-  else {
+  } else {
     if (len == 15) {
       re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);
       splitArr = num.match(re);
@@ -99,12 +99,10 @@ export const isIdCardNo = function(num) {
       if (!((dtmBirth.getYear() == Number(splitArr[2])) && ((dtmBirth.getMonth() + 1) == Number(splitArr[3])) && (dtmBirth.getDate() == Number(splitArr[4])))) {
         // alert('输入的身份证号里出生日期不对！');
         return false;
-      }
-      else {
+      } else {
         return true;
       }
-    }
-    else if (len == 18) {
+    } else if (len == 18) {
       re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);
       var splitArr = num.match(re);
       var dtmBirth = new Date(splitArr[2] + "/" + splitArr[3] + "/" + splitArr[4]);
@@ -117,7 +115,8 @@ export const isIdCardNo = function(num) {
       var checkNum;
       var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
       var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-      var nTemp = 0, i;
+      var nTemp = 0,
+        i;
       for (i = 0; i < 17; i++) {
         nTemp += num.substr(i, 1) * arrInt[i];
       }
@@ -125,8 +124,7 @@ export const isIdCardNo = function(num) {
       if (checkNum != num.substr(17, 1)) {
         // alert('18位身份证的校验码不正确！应该为：' + checkNum);
         return false;
-      }
-      else {
+      } else {
         return true;
       }
     }
@@ -154,17 +152,16 @@ export const isChineseName = function (name) {
  *
  * @param {String|Array} urls
  */
-export const preLoadImages = function(urls){// 可以是String Array或者String
+export const preLoadImages = function (urls) { // 可以是String Array或者String
   var argsLen = arguments.length,
     loadImage = function (url) {
       var img = new Image();
       img.src = url;
     };
   if (argsLen == 1) {
-    if (typeof (urls) == "string" && (sLen = urls.length) > 1) {// 预加载一个图片
+    if (typeof (urls) == "string" && (sLen = urls.length) > 1) { // 预加载一个图片
       loadImage(urls);
-    }
-    else if (Object.prototype.toString.call(arguments[0]) == "[object Array]" && urls.length > 0) {// 预加载多个图片
+    } else if (Object.prototype.toString.call(arguments[0]) == "[object Array]" && urls.length > 0) { // 预加载多个图片
       for (var i = 0; i < urls.length; i++) {
         loadImage(urls[i]);
       }
@@ -177,7 +174,7 @@ export const preLoadImages = function(urls){// 可以是String Array或者String
  * @param {HTMLInputElement} input
  */
 export const filtInputValue = function (input) {
-  var pattern = new RegExp("[%--`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——| {}【】‘’\"；：”“'。，、？]");        // 格式 RegExp("[在中间定义特殊过滤字符]")
+  var pattern = new RegExp("[%--`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——| {}【】‘’\"；：”“'。，、？]"); // 格式 RegExp("[在中间定义特殊过滤字符]")
   var s = input.value;
   var rs = "";
   for (var i = 0; i < s.length; i++) {
@@ -270,12 +267,11 @@ export const preLoadImagesWithCB = function (urls, onFinishCallback, onProgressC
       cb(img);
     };
   };
-  if (typeof urls == "string" && urls.length > 1) {// 预加载一个图片
+  if (typeof urls == "string" && urls.length > 1) { // 预加载一个图片
     loadImage(urls, function () {
       onFinishCallback && onFinishCallback();
     });
-  }
-  else if (Object.prototype.toString.call(arguments[0]) == "[object Array]" && urls.length > 0) {// 预加载多个图片
+  } else if (Object.prototype.toString.call(arguments[0]) == "[object Array]" && urls.length > 0) { // 预加载多个图片
     var length = urls.length,
       completedImgCount = 0;
     for (var i = 0; i < length; i++) {
@@ -324,13 +320,13 @@ export const getStyle = (element, attr, NumberMode = 'int') => {
   // scrollTop 获取方式不同，没有它不属于style，而且只有document.body才能用
   if (attr === 'scrollTop') {
     target = element.scrollTop;
-  }else if(element.currentStyle){
+  } else if (element.currentStyle) {
     target = element.currentStyle[attr];
-  }else{
-    target = document.defaultView.getComputedStyle(element,null)[attr];
+  } else {
+    target = document.defaultView.getComputedStyle(element, null)[attr];
   }
   //在获取 opactiy 时需要获取小数 parseFloat
-  return  NumberMode == 'float'? parseFloat(target) : parseInt(target);
+  return NumberMode == 'float' ? parseFloat(target) : parseInt(target);
 }
 
 /**
@@ -345,27 +341,33 @@ export const loadMore = (element, callback) => {
   let requestFram;
   let oldScrollTop;
 
-  document.body.addEventListener('scroll',() => {
+  document.body.addEventListener('scroll', () => {
     loadMore();
   }, false)
   //运动开始时获取元素 高度 和 offseTop, pading, margin
-  element.addEventListener('touchstart',() => {
+  element.addEventListener('touchstart', () => {
     height = element.offsetHeight;
     setTop = element.offsetTop;
-    paddingBottom = getStyle(element,'paddingBottom');
-    marginBottom = getStyle(element,'marginBottom');
-  },{passive: true})
+    paddingBottom = getStyle(element, 'paddingBottom');
+    marginBottom = getStyle(element, 'marginBottom');
+  }, {
+    passive: true
+  })
 
   //运动过程中保持监听 scrollTop 的值判断是否到达底部
-  element.addEventListener('touchmove',() => {
+  element.addEventListener('touchmove', () => {
     loadMore();
-  },{passive: true})
+  }, {
+    passive: true
+  })
 
   //运动结束时判断是否有惯性运动，惯性运动结束判断是非到达底部
-  element.addEventListener('touchend',() => {
+  element.addEventListener('touchend', () => {
     oldScrollTop = document.body.scrollTop;
     moveEnd();
-  },{passive: true})
+  }, {
+    passive: true
+  })
 
   const moveEnd = () => {
     requestFram = requestAnimationFrame(() => {
@@ -373,7 +375,7 @@ export const loadMore = (element, callback) => {
         oldScrollTop = document.body.scrollTop;
         loadMore();
         moveEnd();
-      }else{
+      } else {
         cancelAnimationFrame(requestFram);
         //为了防止鼠标抬起时已经渲染好数据从而导致重获取数据，应该重新获取dom高度
         height = element.offsetHeight;
@@ -396,28 +398,34 @@ export const showBack = callback => {
   let requestFram;
   let oldScrollTop;
 
-  document.addEventListener('scroll',() => {
+  document.addEventListener('scroll', () => {
     showBackFun();
   }, false)
-  document.addEventListener('touchstart',() => {
+  document.addEventListener('touchstart', () => {
     showBackFun();
-  },{passive: true})
+  }, {
+    passive: true
+  })
 
-  document.addEventListener('touchmove',() => {
+  document.addEventListener('touchmove', () => {
     showBackFun();
-  },{passive: true})
+  }, {
+    passive: true
+  })
 
-  document.addEventListener('touchend',() => {
+  document.addEventListener('touchend', () => {
     oldScrollTop = document.body.scrollTop;
     moveEnd();
-  },{passive: true})
+  }, {
+    passive: true
+  })
 
   const moveEnd = () => {
     requestFram = requestAnimationFrame(() => {
       if (document.body.scrollTop != oldScrollTop) {
         oldScrollTop = document.body.scrollTop;
         moveEnd();
-      }else{
+      } else {
         cancelAnimationFrame(requestFram);
       }
       showBackFun();
@@ -428,7 +436,7 @@ export const showBack = callback => {
   const showBackFun = () => {
     if (document.body.scrollTop > 500) {
       callback(true);
-    }else{
+    } else {
       callback(false);
     }
   }
@@ -450,7 +458,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
   if (duration instanceof Function) {
     callback = duration;
     duration = 400;
-  }else if(duration instanceof String){
+  } else if (duration instanceof String) {
     mode = duration;
     duration = 400;
   }
@@ -479,7 +487,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
   Object.keys(target).forEach(attr => {
     if (/[^\d^\.]+/gi.test(target[attr])) {
       unit[attr] = target[attr].match(/[^\d^\.]+/gi)[0] || 'px';
-    }else{
+    } else {
       unit[attr] = 'px';
     }
     initState[attr] = attrStyle(attr);
@@ -488,46 +496,46 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
   //去掉传入的后缀单位
   Object.keys(target).forEach(attr => {
     if (unit[attr] == 'rem') {
-      target[attr] = Math.ceil(parseInt(target[attr])*rootSize);
-    }else{
+      target[attr] = Math.ceil(parseInt(target[attr]) * rootSize);
+    } else {
       target[attr] = parseInt(target[attr]);
     }
   });
 
 
   let flag = true; //假设所有运动到达终点
-  const remberSpeed = {};//记录上一个速度值,在ease-in模式下需要用到
+  const remberSpeed = {}; //记录上一个速度值,在ease-in模式下需要用到
   element.timer = setInterval(() => {
     Object.keys(target).forEach(attr => {
-      let iSpeed = 0;  //步长
+      let iSpeed = 0; //步长
       let status = false; //是否仍需运动
       let iCurrent = attrStyle(attr) || 0; //当前元素属性址
       let speedBase = 0; //目标点需要减去的基础值，三种运动状态的值都不同
       let intervalTime; //将目标值分为多少步执行，数值越大，步长越小，运动时间越长
-      switch(mode){
+      switch (mode) {
         case 'ease-out':
           speedBase = iCurrent;
-          intervalTime = duration*5/400;
+          intervalTime = duration * 5 / 400;
           break;
         case 'linear':
           speedBase = initState[attr];
-          intervalTime = duration*20/400;
+          intervalTime = duration * 20 / 400;
           break;
         case 'ease-in':
           let oldspeed = remberSpeed[attr] || 0;
-          iSpeed = oldspeed + (target[attr] - initState[attr])/duration;
+          iSpeed = oldspeed + (target[attr] - initState[attr]) / duration;
           remberSpeed[attr] = iSpeed
           break;
         default:
           speedBase = iCurrent;
-          intervalTime = duration*5/400;
+          intervalTime = duration * 5 / 400;
       }
       if (mode !== 'ease-in') {
         iSpeed = (target[attr] - speedBase) / intervalTime;
         iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
       }
       //判断是否达步长之内的误差距离，如果到达说明到达目标点
-      switch(mode){
+      switch (mode) {
         case 'ease-out':
           status = iCurrent != target[attr];
           break;
@@ -549,7 +557,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
           element.style.opacity = (iCurrent + iSpeed) / 100;
         } else if (attr === 'scrollTop') {
           element.scrollTop = iCurrent + iSpeed;
-        }else{
+        } else {
           element.style[attr] = iCurrent + iSpeed + 'px';
         }
       } else {
@@ -624,4 +632,46 @@ export function formatTime(time, option) {
   } else {
     return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
   }
+}
+
+export function preLoadImage(url, callback) { // fixed Chrome 图片load不出来问题
+  let img = new Image() //创建一个Image对象，实现图片的预下载  
+  img.src = url
+
+  if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数  
+    callback && callback.call(img)
+    return // 直接返回，不用再处理onload事件  
+  }
+
+  img.onload = function () { //图片下载完毕时异步调用callback函数。  
+    callback && callback.call(img) //将回调函数的this替换为Image对象  
+  }
+}
+export function createRoundRectPath(x, y, w, h, r) { // 创建圆角矩形
+  const path = new Path2D()
+  path.moveTo(x + r, y)
+  path.lineTo(x + w - r, y)
+  path.arc(x + w - r, y + r, r, Math.PI / 180 * 270, 0, false)
+  path.lineTo(x + w, y + h - r)
+  path.arc(x + w - r, y + h - r, r, 0, Math.PI / 180 * 90, 0, false)
+  path.lineTo(x + r, y + h)
+  path.arc(x + r, y + h - r, r, Math.PI / 180 * 90, Math.PI / 180 * 180, false)
+  path.lineTo(x, y + r)
+  path.arc(x + r, y + r, r, Math.PI / 180 * 180, Math.PI / 180 * 270, false)
+  return path
+}
+export function drawText(ctx,text, x, y) {
+  ctx.save() // 保存画布 用save及restore是为了不影响其他地方使用画布
+  ctx.font = '400 16px "Hiragino Sans GB W3","Microsoft YaHei",sans-serif'
+  let gd = ctx.createLinearGradient(0, 0, 400, 0) // (x0,y0,x1,y1)
+  gd.addColorStop("0", "magenta")
+  gd.addColorStop("0.5", "blue")
+  gd.addColorStop("1.0", "red")
+  ctx.fillStyle = gd
+  ctx.shadowBlur = 5 // ******调节阴影shadowBlur，shadowOffsetX，shadowOffsetY，shadowColor
+  ctx.shadowOffsetX = 2
+  ctx.shadowOffsetY = 2
+  ctx.shadowColor = "#333"
+  ctx.fillText(text, x, y) // ******使用FILLTEXT
+  ctx.restore() // 恢复画布
 }

@@ -81,6 +81,13 @@ export default new Router({
         title: 'Progress Circle'
       },
       component: r => require.ensure([], () => r(require('@/containers/ProgressCircle')), 'ProgressCircle')
+    },
+    {
+      path: '/canvas',
+      meta: { // 动态设置meta
+        title: 'Canvas'
+      },
+      component: r => require.ensure([], () => r(require('@/containers/Canvas')), 'Canvas')
     }
   ]
 })
