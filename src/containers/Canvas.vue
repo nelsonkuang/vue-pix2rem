@@ -15,12 +15,21 @@
         width="413"
         height="374"
       ></canvas>
+
+      <canvas
+        id="canvas_2"
+        class="canvas_2"
+        ref="canvas_2"
+        width="300"
+        height="300"
+      ></canvas>
     </section>
   </article>
 </template>
 
 <script>
 import { goBack, preLoadImage, createRoundRectPath, drawText } from '../util/tools'
+import QRCode from 'qrcode'
 
 export default {
   name: 'Canvas',
@@ -36,7 +45,7 @@ export default {
     let ctx = canvas.getContext('2d')
     preLoadImage('http://www.iampua.com/pui/dist/img/qxhd/heart.png', function () {
       ctx.drawImage(this, 0, 0, 413, 374)
-      preLoadImage("http://Placehold.it/80/ff5500/ffffff&text=R", function () {
+      preLoadImage('http://Placehold.it/80/ff5500/ffffff&text=R', function () {
         ctx.save()
         const pattern = ctx.createPattern(this, 'no-repeat')
         const path = createRoundRectPath(0, 0, 80, 80, 40) // 图片pattern只能从(0, 0)开始填充
@@ -47,6 +56,18 @@ export default {
 
         drawText(ctx, '使用createPattern画图片圆角', 10, canvas.height - 10)
       })
+    })
+
+    QRCode.toCanvas(this.$refs.canvas_2, 'https://www.baidu.com', { width: 300 }, (error) => {
+      if (error) {
+        console.error(error)
+      } else {
+        let canvas = this.$refs.canvas_2
+        let ctx = canvas.getContext('2d')
+        preLoadImage('http://www.iampua.com/pui/dist/img/qxhd/heart.png', function () {
+          ctx.drawImage(this, 130, 130, 40, 40)
+        })
+      }
     })
   },
   components: {
