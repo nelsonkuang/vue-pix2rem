@@ -660,7 +660,7 @@ export function createRoundRectPath(x, y, w, h, r) { // 创建圆角矩形
   path.arc(x + r, y + r, r, Math.PI / 180 * 180, Math.PI / 180 * 270, false)
   return path
 }
-export function drawText(ctx,text, x, y) {
+export function drawText(ctx, text, x, y) {
   ctx.save() // 保存画布 用save及restore是为了不影响其他地方使用画布
   ctx.font = '400 16px "Hiragino Sans GB W3","Microsoft YaHei",sans-serif'
   let gd = ctx.createLinearGradient(0, 0, 400, 0) // (x0,y0,x1,y1)
@@ -674,4 +674,12 @@ export function drawText(ctx,text, x, y) {
   ctx.shadowColor = "#333"
   ctx.fillText(text, x, y) // ******使用FILLTEXT
   ctx.restore() // 恢复画布
+}
+
+export function drawRoundImage(ctx, img, x, y, r) { // 创建圆形图片
+  ctx.save()
+  ctx.arc(x + r, y + r, r, 0, Math.PI * 2, true) // x + r , y + r, r, 0, arc,
+  ctx.clip()
+  ctx.drawImage(img, x, y, 2 * r, 2 * r) // img, x, y, w, h
+  ctx.restore()
 }

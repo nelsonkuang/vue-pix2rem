@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { goBack, preLoadImage, createRoundRectPath, drawText } from '../util/tools'
+import { goBack, preLoadImage, createRoundRectPath, drawText, drawRoundImage } from '../util/tools'
 import QRCode from 'qrcode'
 
 export default {
@@ -65,11 +65,7 @@ export default {
         let canvas = this.$refs.canvas_2
         let ctx = canvas.getContext('2d')
         preLoadImage('https://Placehold.it/80/ff5500/ffffff&text=R', function () {
-          ctx.save()
-          ctx.arc(150, 150, 20, 0, Math.PI * 2, true) // x + r , y + r, r, 0, arc,
-          ctx.clip()
-          ctx.drawImage(this, 130, 130, 40, 40) // img, x, y, w, h
-          ctx.restore()
+          drawRoundImage(ctx, this, 130, 130, 20)
         })
       }
     })
