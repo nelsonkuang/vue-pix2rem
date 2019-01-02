@@ -2351,6 +2351,10 @@ domutils@1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+dropzone@^5.5.0:
+  version "5.5.1"
+  resolved "http://registry.npm.taobao.org/dropzone/download/dropzone-5.5.1.tgz#06e2f513e61d6aa363d4b556f18574f47cf7ba26"
+
 duplexer@^0.1.1:
   version "0.1.1"
   resolved "http://registry.npm.taobao.org/duplexer/download/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
@@ -7876,6 +7880,12 @@ vue-template-compiler@^2.5.2:
 vue-template-es2015-compiler@^1.5.3, vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
+
+vue2-dropzone@^3.5.2:
+  version "3.5.2"
+  resolved "http://registry.npm.taobao.org/vue2-dropzone/download/vue2-dropzone-3.5.2.tgz#602630b1577d861810555646b72338de69feebe2"
+  dependencies:
+    dropzone "^5.5.0"
 
 vue@^2.5.2:
   version "2.5.13"

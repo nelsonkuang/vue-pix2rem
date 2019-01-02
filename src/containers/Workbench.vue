@@ -1,14 +1,42 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a class="back back_ico" href="javascript:void(0);" @click="goBack"></a><span class="title">{{msg}}</span></div>
+      <div class="container"><a
+          class="back back_ico"
+          href="javascript:void(0);"
+          @click="goBack"
+        ></a><span class="title">{{msg}}</span></div>
     </header>
     <section class="main">
-      <div style="text-align: center;" @click="testNextTick">Getter测试：当前用户 - {{username}} - 点击进行nextTick测试</div>
-      <div class="btn" @click="topToast" v-ripple="{color:'#fff', duration: 200}">top toast</div>
-      <div class="btn" @click="centerToast" v-ripple="{color:'#000', duration: 300}">center toast</div>
-      <div class="btn" @click="bottomToast" v-ripple="{color:'red', duration: 400}">bottom toast</div>
-      <div class="btn" @click="iconToast" v-ripple="{color:'green', duration: 500}">icon toast</div>
+      <div
+        style="text-align: center;"
+        @click="testNextTick"
+      >Getter测试：当前用户 - {{username}} - 点击进行nextTick测试</div>
+      <div
+        class="btn"
+        @click="topToast"
+        v-ripple="{color:'#fff', duration: 200}"
+      >top toast</div>
+      <div
+        class="btn"
+        @click="centerToast"
+        v-ripple="{color:'#000', duration: 300}"
+      >center toast</div>
+      <div
+        class="btn"
+        @click="bottomToast"
+        v-ripple="{color:'red', duration: 400}"
+      >bottom toast</div>
+      <div
+        class="btn"
+        @click="iconToast"
+        v-ripple="{color:'green', duration: 500}"
+      >icon toast</div>
+      <vue-dropzone
+        ref="myVueDropzone"
+        id="dropzone"
+        :options="dropzoneOptions"
+      ></vue-dropzone>
     </section>
   </article>
 </template>
@@ -16,12 +44,24 @@
 <script>
 import { goBack } from '../util/tools'
 import { mapGetters } from 'vuex'
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
   name: 'Workbench',
+  components: {
+    vueDropzone: vue2Dropzone
+  },
   data () {
     return {
-      msg: 'Workbench'
+      msg: 'Workbench',
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        thumbnailWidth: 150,
+        maxFilesize: 0.5,
+        headers: { 'My-Awesome-Header': 'header value' },
+        acceptedFiles: 'image/*,application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      }
     }
   },
   created () {
@@ -34,8 +74,6 @@ export default {
     console.log('bubbleSort', this.bubbleSort([10, 5, 2, 4, 3, 1, 0], true))
     console.log('quickSort', this.quickSort([10, 5, 2, 4, 3, 654, 0]))
     console.log('getFibonacci', this.getFibonacci(15))
-  },
-  components: {
   },
   computed: {
     ...mapGetters(['username'])
@@ -224,10 +262,10 @@ export default {
 
 <style lang="scss" scoped>
 .btn {
-  color:#fff;
+  color: #fff;
   background-color: blueviolet;
   border-radius: 5px;
-  padding:20px;
+  padding: 20px;
   margin: 10px auto;
   text-align: center;
 }
