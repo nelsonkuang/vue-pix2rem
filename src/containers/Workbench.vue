@@ -60,7 +60,7 @@ export default {
         thumbnailWidth: 150,
         maxFilesize: 0.5,
         headers: { 'My-Awesome-Header': 'header value' },
-        acceptedFiles: 'image/*,application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        acceptedFiles: 'application/pdf'
       }
     }
   },

@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex' // mapActions也可以引进使用
 import Modal from '../components/Modal'
 import { goBack, isMobileNumber, extend } from '../util/tools'
 import { userPswLogin, userCodeLogin } from '../service'
@@ -133,6 +133,8 @@ export default {
     }
   },
   methods: {
+    // 还可以mapActions
+    // mapActions(['removeTodo'])
     ...mapMutations([
       'RECORD_USER_INFO'
     ]),
