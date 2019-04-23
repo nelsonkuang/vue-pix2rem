@@ -16,6 +16,7 @@
         <li><router-link to="progress-circle">ProgressCircle</router-link></li>
         <li><router-link to="workbench">Workbench</router-link></li>
         <li><router-link to="canvas">Canvas</router-link></li>
+        <li><router-link to="simple-tree">SimpleTree</router-link></li>
         <li>developing...</li>
       </ul>
       <div style="text-align: center;"><a href="javascript:void(0);" style="color: #70aefc;" v-if="!!userInfo" @click="logout">退出登录，</a>欢迎用户：{{ userInfo ? userInfo.username : '游客' }}</div>

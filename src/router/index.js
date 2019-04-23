@@ -88,6 +88,13 @@ export default new Router({
         title: 'Canvas'
       },
       component: r => require.ensure([], () => r(require('@/containers/Canvas')), 'Canvas')
+    },
+    {
+      path: '/simple-tree',
+      meta: { // 动态设置meta
+        title: 'Simple Tree'
+      },
+      component: r => require.ensure([], () => r(require('@/containers/SimpleTree')), 'SimpleTree')
     }
   ]
 })

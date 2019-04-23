@@ -37,6 +37,14 @@
         id="dropzone"
         :options="dropzoneOptions"
       ></vue-dropzone>
+      <vue-core-image-upload
+        :class="['btn', 'btn-primary']"
+        :crop="'local'"
+        @imageuploaded="imageuploaded"
+        :max-file-size="5242880"
+        url="https://httpbin.org/post"
+      >
+      </vue-core-image-upload>
     </section>
   </article>
 </template>
@@ -46,11 +54,13 @@ import { goBack } from '../util/tools'
 import { mapGetters } from 'vuex'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import VueCoreImageUpload from 'vue-core-image-upload'
 
 export default {
   name: 'Workbench',
   components: {
-    vueDropzone: vue2Dropzone
+    vueDropzone: vue2Dropzone,
+    'vue-core-image-upload': VueCoreImageUpload
   },
   data () {
     return {
@@ -61,7 +71,8 @@ export default {
         maxFilesize: 0.5,
         headers: { 'My-Awesome-Header': 'header value' },
         acceptedFiles: 'application/pdf'
-      }
+      },
+      src: 'http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png'
     }
   },
   created () {
@@ -255,6 +266,9 @@ export default {
         i += 1
       }
       return fibaArr
+    },
+    imageuploaded (res) {
+      console.log(res)
     }
   }
 }
