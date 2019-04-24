@@ -45,6 +45,12 @@
         url="https://httpbin.org/post"
       >
       </vue-core-image-upload>
+      <div>
+        <div>absolute: {{absolute}}</div>
+        <div>alpha: {{alpha}}</div>
+        <div>beta: {{beta}}</div>
+        <div>gamma: {{gamma}}</div>
+      </div>
     </section>
   </article>
 </template>
@@ -72,7 +78,11 @@ export default {
         headers: { 'My-Awesome-Header': 'header value' },
         acceptedFiles: 'application/pdf'
       },
-      src: 'http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png'
+      src: 'http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png',
+      absolute: '',
+      alpha: '',
+      beta: '',
+      gamma: ''
     }
   },
   created () {
@@ -85,6 +95,7 @@ export default {
     console.log('bubbleSort', this.bubbleSort([10, 5, 2, 4, 3, 1, 0], true))
     console.log('quickSort', this.quickSort([10, 5, 2, 4, 3, 654, 0]))
     console.log('getFibonacci', this.getFibonacci(15))
+    window.addEventListener('deviceorientation', this.handleDeviceOrientation, true)
   },
   computed: {
     ...mapGetters(['username'])
@@ -269,6 +280,12 @@ export default {
     },
     imageuploaded (res) {
       console.log(res)
+    },
+    handleDeviceOrientation (orientData) {
+      this.absolute = orientData.absolute
+      this.alpha = orientData.alpha
+      this.beta = orientData.beta
+      this.gamma = orientData.gamma
     }
   }
 }
