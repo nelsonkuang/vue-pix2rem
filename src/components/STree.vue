@@ -315,6 +315,9 @@ export default {
     getSelectedValue () {
       return this.treeItemsSelectedVals
     },
+    getSelectedLeafKeys () {
+      return this.treeItemsSelectedLeafKeys
+    },
     append (nodes, pid) {
       if (!pid) {
         this.treeItems = this.treeItems.concat(nodes.map((_) => {
@@ -351,6 +354,38 @@ export default {
           }
         })
       }
+      this.onChange && this.onChange(this.treeItemsVals)
+    },
+    remove (keys) {
+      const selectedLeafKeys = keys || this.treeItemsSelectedLeafKeys
+      if (selectedLeafKeys.length === 0) {
+        return false
+      }
+      let tempArr = [...this.treeItems]
+      let deletedRootKeys = []
+      let children = []
+      selectedLeafKeys.forEach((_) => {
+        tempArr = tempArr.filter(it => it.id !== _)
+        tempArr = tempArr.map((it) => {
+          children = it.children
+          if (children.length === 0) {
+            return it
+          } else if (children.length === 1) {
+            if (children[0].id === _) {
+              deletedRootKeys.push(it.id)
+              children = []
+            }
+          } else {
+            children = children.filter(item => item.id !== _)
+          }
+          return {
+            ...it,
+            children
+          }
+        })
+      })
+      deletedRootKeys.length > 0 && (tempArr = tempArr.filter(_ => !deletedRootKeys.find(it => it === _.id)))
+      return tempArr
     }
   },
   computed: {
@@ -400,6 +435,19 @@ export default {
         }
       })
       return arr
+    },
+    treeItemsSelectedLeafKeys () {
+      let keys = []
+      this.treeItemsSelectedVals.forEach((_) => {
+        if (_.children.length === 0) {
+          keys.push(_.id)
+        } else {
+          _.children.forEach((it) => {
+            keys.push(it.id)
+          })
+        }
+      })
+      return keys
     }
   },
   watch: {

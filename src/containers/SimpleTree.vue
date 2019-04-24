@@ -18,7 +18,8 @@
       <div class="stree-opt">
         <button @click="getVal">获取当前数据</button>
         <button @click="getSelectedVal">获取已选择的节点数据</button>
-        <button @click="appendNodes">追加节点数据</button>
+        <button @click="appendNodes">追加节点</button>
+        <button @click="removeNodes">删除选中节点</button>
       </div>
     </section>
   </article>
@@ -115,6 +116,10 @@ export default {
           children: []
         }
       ])
+    },
+    removeNodes () {
+      console.log('---------执行removeNodes函数---------')
+      this.$refs.myTree.remove()
     }
   },
   created () { },
