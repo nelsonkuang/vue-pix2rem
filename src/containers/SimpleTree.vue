@@ -20,6 +20,7 @@
         <button @click="getSelectedVal">获取已选择的节点数据</button>
         <button @click="appendNodes">追加节点</button>
         <button @click="removeNodes">删除选中节点</button>
+        <button @click="groupNodes">组合选中节点</button>
       </div>
     </section>
   </article>
@@ -37,20 +38,21 @@ export default {
   data () {
     return {
       msg: 'Simple Tree',
+      idSeed: 10,
       data: [
         {
-          id: '0',
+          id: 0,
           label: '线状1',
           icon: 'icon-folder',
           children: [
             {
-              id: '1',
+              id: 1,
               label: '线状1-1',
               icon: 'icon-sun',
               children: []
             },
             {
-              id: '2',
+              id: 2,
               label: '线状1-2',
               icon: 'icon-sun',
               children: []
@@ -58,18 +60,18 @@ export default {
           ]
         },
         {
-          id: '3',
+          id: 3,
           label: '线状2',
           icon: 'icon-folder',
           children: [
             {
-              id: '4',
+              id: 4,
               label: '线状2-1',
               icon: 'icon-sun',
               children: []
             },
             {
-              id: '5',
+              id: 5,
               label: '线状2-2',
               icon: 'icon-sun',
               children: []
@@ -77,7 +79,7 @@ export default {
           ]
         },
         {
-          id: '6',
+          id: 6,
           label: '线状3',
           icon: 'icon-sun',
           children: []
@@ -104,13 +106,13 @@ export default {
     appendNodes () {
       this.$refs.myTree.append([
         {
-          id: '7',
+          id: 7,
           label: '线状4',
           icon: 'icon-sun',
           children: []
         },
         {
-          id: '8',
+          id: 8,
           label: '线状5',
           icon: 'icon-sun',
           children: []
@@ -120,6 +122,10 @@ export default {
     removeNodes () {
       console.log('---------执行removeNodes函数---------')
       this.$refs.myTree.remove()
+    },
+    groupNodes () {
+      console.log('---------执行groupNodes函数---------')
+      this.$refs.myTree.group(++this.idSeed, '我的组合名称', 'icon-folder') // id, label, icon
     }
   },
   created () { },

@@ -308,17 +308,41 @@ export default {
       this.treeItems = tempArr
       this.onChange && this.onChange(this.treeItemsVals)
     },
-    // 供外部使用函数
-    getValue () {
-      return this.treeItemsVals
+    removeNodes (keys) {
+      const selectedLeafKeys = keys || this.treeItemsSelectedLeafKeys
+      if (selectedLeafKeys.length === 0) {
+        return false
+      }
+      let tempArr = [...this.treeItems]
+      let deletedRootKeys = []
+      let children = []
+      selectedLeafKeys.forEach((_) => {
+        tempArr = tempArr.filter(it => it.id !== _)
+        tempArr = tempArr.map((it) => {
+          children = it.children
+          if (children.length === 0) {
+            return it
+          } else if (children.length === 1) {
+            if (children[0].id === _) {
+              deletedRootKeys.push(it.id)
+              children = []
+            }
+          } else {
+            children = children.filter(item => item.id !== _)
+          }
+          return {
+            ...it,
+            children
+          }
+        })
+      })
+      if (deletedRootKeys.length > 0) {
+        tempArr = tempArr.filter(_ => deletedRootKeys.find(it => it === _.id) === undefined)
+        // console.log(tempArr)
+      }
+      this.treeItems = tempArr
     },
-    getSelectedValue () {
-      return this.treeItemsSelectedVals
-    },
-    getSelectedLeafKeys () {
-      return this.treeItemsSelectedLeafKeys
-    },
-    append (nodes, pid) {
+    appendNodes (nodes, pid) {
       if (!pid) {
         this.treeItems = this.treeItems.concat(nodes.map((_) => {
           return {
@@ -351,42 +375,70 @@ export default {
                 }
               }))
             }
+          } else {
+            return n
           }
         })
       }
+    },
+    appendRawNodes (nodes, pid) {
+      if (!pid) {
+        this.treeItems = this.treeItems.concat(nodes)
+      } else {
+        this.treeItems = this.treeItems.map((n) => {
+          if (n.id === pid) {
+            return {
+              ...n,
+              children: n.children.concat(nodes)
+            }
+          } else {
+            return n
+          }
+        })
+      }
+    },
+    // 供外部使用函数
+    getValue () {
+      return this.treeItemsVals
+    },
+    getSelectedValue () {
+      return this.treeItemsSelectedVals
+    },
+    getSelectedLeafKeys () {
+      return this.treeItemsSelectedLeafKeys
+    },
+    append (nodes, pid) {
+      this.appendNodes(nodes, pid)
       this.onChange && this.onChange(this.treeItemsVals)
     },
     remove (keys) {
-      const selectedLeafKeys = keys || this.treeItemsSelectedLeafKeys
+      this.removeNodes(keys)
+      this.onChange && this.onChange(this.treeItemsVals)
+    },
+    group (groupId, groupLabel, groupIcon) {
+      const selectedLeafKeys = this.treeItemsSelectedLeafKeys
+      const selectedRawItems = [...this.selectedRawTreeItems]
       if (selectedLeafKeys.length === 0) {
         return false
-      }
-      let tempArr = [...this.treeItems]
-      let deletedRootKeys = []
-      let children = []
-      selectedLeafKeys.forEach((_) => {
-        tempArr = tempArr.filter(it => it.id !== _)
-        tempArr = tempArr.map((it) => {
-          children = it.children
-          if (children.length === 0) {
-            return it
-          } else if (children.length === 1) {
-            if (children[0].id === _) {
-              deletedRootKeys.push(it.id)
-              children = []
+      } else {
+        this.removeNodes(selectedLeafKeys)
+        this.$nextTick(() => {
+          this.appendRawNodes([
+            {
+              isSelected: 1,
+              isExpanded: 1,
+              uid: ++this.uidSeed,
+              id: groupId || String(new Date().getTime() + Math.floor(9999 * Math.random())).substr(-8, 8),
+              label: groupLabel || '新的组合',
+              icon: groupIcon || 'icon-folder',
+              children: selectedRawItems.reduce((resultArr, currentItem) => {
+                return currentItem.children.length > 0 ? resultArr.concat(currentItem.children) : resultArr.concat([currentItem])
+              }, [])
             }
-          } else {
-            children = children.filter(item => item.id !== _)
-          }
-          return {
-            ...it,
-            children
-          }
+          ])
+          this.onChange && this.onChange(this.treeItemsVals)
         })
-      })
-      deletedRootKeys.length > 0 && (tempArr = tempArr.filter(_ => !deletedRootKeys.find(it => it === _.id)))
-      this.treeItems = tempArr
-      this.onChange && this.onChange(this.treeItemsVals)
+      }
     }
   },
   computed: {
@@ -449,6 +501,19 @@ export default {
         }
       })
       return keys
+    },
+    selectedRawTreeItems () {
+      let arr = []
+      this.treeItems.forEach((_) => {
+        if (_.isSelected) {
+          arr.push(_)
+        } else {
+          _.children.forEach((item) => {
+            item.isSelected && arr.push(item)
+          })
+        }
+      })
+      return arr
     }
   },
   watch: {
