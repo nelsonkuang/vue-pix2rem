@@ -385,7 +385,8 @@ export default {
         })
       })
       deletedRootKeys.length > 0 && (tempArr = tempArr.filter(_ => !deletedRootKeys.find(it => it === _.id)))
-      return tempArr
+      this.treeItems = tempArr
+      this.onChange && this.onChange(this.treeItemsVals)
     }
   },
   computed: {
