@@ -5,32 +5,67 @@
     </header>
     <section class="main">
       <ul>
-        <li><router-link to="login">Login Demo</router-link></li>
-        <li><router-link to="one-scroller">One Scroller Demo</router-link></li>
-        <li><router-link to="modal-demo">Modal Demo</router-link></li>
-        <li><router-link to="modal-demo-ii">Modal Demo II</router-link></li>
-        <li><router-link to="address-demo">Address Demo</router-link></li>
-        <li><router-link to="async-address-demo">Async Address Demo</router-link></li>
-        <li><router-link to="swiper">Swiper Demo</router-link></li>
-        <li><router-link to="iscroll">Iscroll Demo</router-link></li>
-        <li><router-link to="progress-circle">ProgressCircle</router-link></li>
-        <li><router-link to="workbench">Workbench</router-link></li>
-        <li><router-link to="canvas">Canvas</router-link></li>
-        <li><router-link to="render-tree-demo">渲染函数 Tree Demo</router-link></li>
-        <li><router-link to="jsx">Jsx Tree Demo</router-link></li>
+        <li>
+          <router-link to="login">Login Demo</router-link>
+        </li>
+        <li>
+          <router-link to="one-scroller">One Scroller Demo</router-link>
+        </li>
+        <li>
+          <router-link to="modal-demo">Modal Demo</router-link>
+        </li>
+        <li>
+          <router-link to="modal-demo-ii">Modal Demo II</router-link>
+        </li>
+        <li>
+          <router-link to="address-demo">Address Demo</router-link>
+        </li>
+        <li>
+          <router-link to="async-address-demo">Async Address Demo</router-link>
+        </li>
+        <li>
+          <router-link to="swiper">Swiper Demo</router-link>
+        </li>
+        <li>
+          <router-link to="iscroll">Iscroll Demo</router-link>
+        </li>
+        <li>
+          <router-link to="progress-circle">ProgressCircle</router-link>
+        </li>
+        <li>
+          <router-link to="workbench">Workbench</router-link>
+        </li>
+        <li>
+          <router-link to="canvas">Canvas</router-link>
+        </li>
+        <li>
+          <router-link to="simple-tree">SimpleTree</router-link>
+        </li>
+        <li>
+          <router-link to="render-tree-demo">渲染函数 Tree Demo</router-link>
+        </li>
         <li>developing...</li>
       </ul>
-      <div style="text-align: center;"><a href="javascript:void(0);" style="color: #70aefc;" v-if="!!userInfo" @click="logout">退出登录，</a>欢迎用户：{{ userInfo ? userInfo.username : '游客' }}</div>
+      <div style="text-align: center;"><a
+          href="javascript:void(0);"
+          style="color: #70aefc;"
+          v-if="!!userInfo"
+          @click="logout"
+        >退出登录，</a>欢迎用户：{{ userInfo ? userInfo.username : '游客' }}</div>
       <div style="text-align: center;margin-top:20px;">当前时间：{{now | parseTime('{y}年{m}月{d}日 {h}:{i}:{s} 星期{a}')}}</div>
       <transition name="fade">
-        <div class="alert-tips" v-if="tipsOn" v-click-outside="closeTips">{{tips}}</div>
+        <div
+          class="alert-tips"
+          v-if="tipsOn"
+          v-click-outside="closeTips"
+        >{{tips}}</div>
       </transition>
     </section>
   </article>
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'Home',
@@ -127,35 +162,37 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../style/pix2rem/index';
-  .main {
-    ul, li {
-      list-style: decimal;
-    }
-    ul {
-      padding-top: r(30);
-      padding-left: r(30);
-      margin-left: r(60);
-      margin-right: r(60);
-    }
-    li{
-      margin-bottom: r(30);
-      border-bottom:1px solid #ddd;
-    }
+@import "../style/pix2rem/index";
+.main {
+  ul,
+  li {
+    list-style: decimal;
   }
-  .alert-tips{
-    position: relative;
-    padding: r(20);
-    margin: r(20);
-    border: 1px solid #b8daff;
-    border-radius: r(5);
-    color: #004085;
-    background-color: #cce5ff;
+  ul {
+    padding-top: r(30);
+    padding-left: r(30);
+    margin-left: r(60);
+    margin-right: r(60);
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
+  li {
+    margin-bottom: r(30);
+    border-bottom: 1px solid #ddd;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-  }
+}
+.alert-tips {
+  position: relative;
+  padding: r(20);
+  margin: r(20);
+  border: 1px solid #b8daff;
+  border-radius: r(5);
+  color: #004085;
+  background-color: #cce5ff;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>
