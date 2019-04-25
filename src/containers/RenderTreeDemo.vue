@@ -32,6 +32,22 @@ export default {
       },
       render (h) {
         // const nodes = this.nodes
+        function clickHandler (e) {
+          // console.log(e)
+          let el = e.target
+          let nextSibling = el.nextElementSibling
+          if (nextSibling) {
+            if (el.classList.contains('open')) {
+              el.classList.remove('open')
+              el.classList.add('close')
+              nextSibling.classList.add('hide')
+            } else {
+              el.classList.remove('close')
+              el.classList.add('open')
+              nextSibling.classList.remove('hide')
+            }
+          }
+        }
         function renderNode (nodes) {
           if (nodes.length > 0) {
             return h('ul', {}, nodes.map((_) => {
@@ -43,6 +59,9 @@ export default {
                   },
                   attrs: {
                     href: 'javascript:void(0);'
+                  },
+                  on: {
+                    click: clickHandler
                   }
                 }, [_.name])
               ].concat(
@@ -135,11 +154,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.hide {
-  display: none !important;
-}
 .menu {
   /deep/ {
+    .hide {
+      display: none !important;
+    }
     a {
       color: #000;
       padding: 10px 0;
