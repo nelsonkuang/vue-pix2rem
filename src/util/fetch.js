@@ -1,7 +1,7 @@
 // 参考 https://github.com/bailicangdu/vue2-elm/blob/master/src/config/fetch.js
 const baseUrl = 'http://localhost:3000'; // https://github.com/typicode/json-server 用json-server搭建本地服务器, 也可以查看根目录 mock-db.js 查看使用说明
 
-export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
+export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
   type = type.toUpperCase();
   url = baseUrl + url;
 
@@ -37,7 +37,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
     }
 
     try {
-      const response = type == 'GET'? await fetch(url) : await fetch(url, requestConfig);
+      const response = type == 'GET' ? await fetch(url) : await fetch(url, requestConfig);
       const responseJson = await response.json();
       return responseJson;
     } catch (error) {

@@ -1,24 +1,37 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a class="back back_ico" href="javascript:void(0);" @click="goBack"></a><span class="title">{{msg}}</span></div>
+      <div class="container"><a
+          class="back back_ico"
+          href="javascript:void(0);"
+          @click="goBack"
+        ></a><span class="title">{{msg}}</span></div>
     </header>
     <section class="main">
-      <button id="show-modal" @click="showModal({
+      <button
+        id="show-modal"
+        @click="showModal({
           showCancel: false,
           showOk: false,
           duration: 2000
-        })">Show Modal 0</button>
+        })"
+      >Show Modal 0</button>
       <br>
-      <button id="show-modal1" @click="showModal({
+      <button
+        id="show-modal1"
+        @click="showModal({
           showCancel: false,
           okCallback: okcallback1
-        })">Show Modal 1</button>
+        })"
+      >Show Modal 1</button>
       <br>
-      <button id="show-modal2" @click="showModal({
+      <button
+        id="show-modal2"
+        @click="showModal({
           okCallback: okcallback2,
           cancelCallback: cancelcallback2
-        })">Show Modal 2</button>
+        })"
+      >Show Modal 2</button>
       <!-- use the modal component, pass in the prop -->
       <modal
         :show="modalProps.show"
@@ -32,7 +45,10 @@
       >
         <strong slot="header">Support Slot</strong>
         <div slot="body">
-          <router-link to="login" style="color: #70aefc;text-decoration: underline;">Login Demo</router-link>
+          <router-link
+            to="login"
+            style="color: #70aefc;text-decoration: underline;"
+          >Login Demo</router-link>
         </div>
       </modal>
     </section>
@@ -41,7 +57,7 @@
 
 <script>
 import Modal from '../components/Modal'
-import {goBack, extend} from '../util/tools'
+import { goBack, extend } from '../util/tools'
 export default {
   name: 'ModalDemoII',
   data () {
@@ -113,12 +129,12 @@ export default {
 </script>
 
 <style scoped>
-  .main {
-    text-align: center;
-  }
-  button {
-    text-align: center;
-    margin: 30px 0;
-    padding: 20px;
-  }
+.main {
+  text-align: center;
+}
+button {
+  text-align: center;
+  margin: 30px 0;
+  padding: 20px;
+}
 </style>

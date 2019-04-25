@@ -2,49 +2,145 @@
   <article class="pageview">
     <header class="header fixed">
       <div class="container">
-        <a class="back back_ico" href="javascript:void(0);" @click="goBack"></a>
-        <span class="title">登    录</span>
-        <div class="ctr_btns"><a class="active" id="reg" href="javascript:void(0);">注册</a></div>
+        <a
+          class="back back_ico"
+          href="javascript:void(0);"
+          @click="goBack"
+        ></a>
+        <span class="title">登 录</span>
+        <div class="ctr_btns"><a
+            class="active"
+            id="reg"
+            href="javascript:void(0);"
+          >注册</a></div>
       </div>
     </header>
     <section class="main login">
       <div class="login_tips">动态验证码登录，无需设置密码，更安全</div>
-      <div class="login_wrap clearfix" :class="{type_code: typeCode}" id="login_wrap">
-        <div class="l_item normal_login" id="normal_login">
+      <div
+        class="login_wrap clearfix"
+        :class="{type_code: typeCode}"
+        id="login_wrap"
+      >
+        <div
+          class="l_item normal_login"
+          id="normal_login"
+        >
           <div class="input_panel">
             <ul>
-              <li class="hint--top  hint--error hint--rounded active" :data-hint="phoneForPswMsg">
-                <i class="login_ico ph l"></i><input type="number" name="phone" v-model="phoneForPsw" id="login_name" placeholder="请输入手机号码" @blur="phoneCheck" v-focus>
+              <li
+                class="hint--top  hint--error hint--rounded active"
+                :data-hint="phoneForPswMsg"
+              >
+                <i class="login_ico ph l"></i><input
+                  type="number"
+                  name="phone"
+                  v-model="phoneForPsw"
+                  id="login_name"
+                  placeholder="请输入手机号码"
+                  @blur="phoneCheck"
+                  v-focus
+                >
               </li>
-              <li class="hint--top  hint--error hint--rounded active" :data-hint="pswMsg">
-                <i class="login_ico lock l"></i><input :type="eyeOpen ? 'text' : 'password'" name="password" v-model="psw" id="password" placeholder="请输入密码" @blur="pswCheck"><i class="login_ico eye r" :class="{open: eyeOpen}" id="eye" @click="toggleEye"></i>
+              <li
+                class="hint--top  hint--error hint--rounded active"
+                :data-hint="pswMsg"
+              >
+                <i class="login_ico lock l"></i><input
+                  :type="eyeOpen ? 'text' : 'password'"
+                  name="password"
+                  v-model="psw"
+                  id="password"
+                  placeholder="请输入密码"
+                  @blur="pswCheck"
+                ><i
+                  class="login_ico eye r"
+                  :class="{open: eyeOpen}"
+                  id="eye"
+                  @click="toggleEye"
+                ></i>
               </li>
             </ul>
           </div>
           <div class="btns">
-            <input type="submit" class="btn_red" value="登      录" id="login_btn" @click="submitPswForm">
+            <input
+              type="submit"
+              class="btn_red"
+              value="登      录"
+              id="login_btn"
+              @click="submitPswForm"
+            >
             <div class="clearfix reg">
-              <a class="fl" href="javascript:void(0);" id="switch_to_2" @click="toggleLoginType">动态验证码登录</a><a class="fr" href="javascript:void(0);">忘记密码？</a>
+              <a
+                class="fl"
+                href="javascript:void(0);"
+                id="switch_to_2"
+                @click="toggleLoginType"
+              >动态验证码登录</a><a
+                class="fr"
+                href="javascript:void(0);"
+              >忘记密码？</a>
             </div>
             <div style="font-size: 12px;color: #ddd;margin-top: 20px;">用户名：18666666666 密码: admin</div>
           </div>
         </div>
-        <div class="l_item code_login" id="code_login">
+        <div
+          class="l_item code_login"
+          id="code_login"
+        >
           <div class="input_panel">
             <ul>
-              <li class="hint--top  hint--error hint--rounded active" :data-hint="phoneForCodeMsg">
-                <i class="login_ico ph l"></i><input type="number" name="phone" v-model="phoneForCode" id="login_name_2" placeholder="请输入手机号码" @blur="phoneCheck">
-                <input type="button" class="code_btn" :value="verifiedCodeBtnText" id="send_code" @click="getVerifyCode" :disabled="verifiedCodeDisabled">
+              <li
+                class="hint--top  hint--error hint--rounded active"
+                :data-hint="phoneForCodeMsg"
+              >
+                <i class="login_ico ph l"></i><input
+                  type="number"
+                  name="phone"
+                  v-model="phoneForCode"
+                  id="login_name_2"
+                  placeholder="请输入手机号码"
+                  @blur="phoneCheck"
+                >
+                <input
+                  type="button"
+                  class="code_btn"
+                  :value="verifiedCodeBtnText"
+                  id="send_code"
+                  @click="getVerifyCode"
+                  :disabled="verifiedCodeDisabled"
+                >
               </li>
-              <li class="hint--top  hint--error hint--rounded active" :data-hint="verifiedCodeMsg">
-                <i class="login_ico key l"></i><input type="text" name="code" v-model="verifiedCode" id="code" placeholder="请输入验证码" @blur="verifiedCodeCheck">
+              <li
+                class="hint--top  hint--error hint--rounded active"
+                :data-hint="verifiedCodeMsg"
+              >
+                <i class="login_ico key l"></i><input
+                  type="text"
+                  name="code"
+                  v-model="verifiedCode"
+                  id="code"
+                  placeholder="请输入验证码"
+                  @blur="verifiedCodeCheck"
+                >
               </li>
             </ul>
           </div>
           <div class="btns">
-            <input type="submit" class="btn_red" value="登      录" id="login_btn_2" @click="submitCodeForm">
+            <input
+              type="submit"
+              class="btn_red"
+              value="登      录"
+              id="login_btn_2"
+              @click="submitCodeForm"
+            >
             <div class="clearfix reg">
-              <a class="fl" href="javascript:void(0);" id="switch_to_1" @click="toggleLoginType">密码登录</a>
+              <a
+                class="fl"
+                href="javascript:void(0);"
+                id="switch_to_1"
+                @click="toggleLoginType"
+              >密码登录</a>
             </div>
             <div style="font-size: 12px;color: #ddd;margin-top: 20px;">用户名：18666666666 短信验证码: 186666</div>
           </div>
@@ -328,224 +424,223 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../style/pix2rem/index';
-  @import '../style/mixin';
-  @import '../style/hint';
+@import "../style/pix2rem/index";
+@import "../style/mixin";
+@import "../style/hint";
 
-  .login_ico {
-    background: url(../images/login_v2_ico.png) no-repeat;
-    background-size: r(300) r(200);
+.login_ico {
+  background: url(../images/login_v2_ico.png) no-repeat;
+  background-size: r(300) r(200);
 
-    &.ph {
-      @include wh(r(30), r(40));
-      background-position: left bottom;
-    }
-    &.lock{
-      @include wh(r(35), r(40));
-      background-position: r(-200) bottom;
-    }
-    &.eye{
-      @include wh(r(40), r(25));
-      background-position: right bottom;
-      &.open{
-        background-position: right r(-125);
-      }
-    }
-    &.qq{
-      @include wh(r(100), r(100));
-      background-position: left top;
-    }
-    &.we_chat{
-      @include wh(r(100), r(100));
-      background-position: r(-100) top;
-    }
-    &.weibo{
-      @include wh(r(100), r(100));
-      background-position: right top;
-    }
-    &.key{
-      @include wh(r(38), r(38));
-      background-position: r(-100) bottom;
+  &.ph {
+    @include wh(r(30), r(40));
+    background-position: left bottom;
+  }
+  &.lock {
+    @include wh(r(35), r(40));
+    background-position: r(-200) bottom;
+  }
+  &.eye {
+    @include wh(r(40), r(25));
+    background-position: right bottom;
+    &.open {
+      background-position: right r(-125);
     }
   }
+  &.qq {
+    @include wh(r(100), r(100));
+    background-position: left top;
+  }
+  &.we_chat {
+    @include wh(r(100), r(100));
+    background-position: r(-100) top;
+  }
+  &.weibo {
+    @include wh(r(100), r(100));
+    background-position: right top;
+  }
+  &.key {
+    @include wh(r(38), r(38));
+    background-position: r(-100) bottom;
+  }
+}
 
-  .header {
-    background-color: #fcf9f1;
+.header {
+  background-color: #fcf9f1;
 
-    .title {
-      color: #333;
-      font-size: r(36);
-    }
-    .ctr_btns {
-      position: absolute;
-      width: 2rem;
-      height: 1.333rem;
-      right: 0;
-      top: 0;
-      line-height: 1.333rem;
-      text-align: center;
-      font-size: 0.4rem;
+  .title {
+    color: #333;
+    font-size: r(36);
+  }
+  .ctr_btns {
+    position: absolute;
+    width: 2rem;
+    height: 1.333rem;
+    right: 0;
+    top: 0;
+    line-height: 1.333rem;
+    text-align: center;
+    font-size: 0.4rem;
+  }
+}
+.pageview {
+  background: url(../images/login_bg.jpg) no-repeat left bottom;
+  background-size: 100% auto;
+}
+.login {
+  margin-bottom: r(72);
+  font-size: r(30);
+  width: 100%;
+  overflow: hidden;
+
+  .login_tips {
+    font-size: r(28);
+    color: #494a4d;
+    background-color: #e4e2de;
+    height: r(80);
+    line-height: r(80);
+    text-align: center;
+    margin-bottom: r(80);
+  }
+  .login_wrap {
+    width: 200%;
+    transition: transform 0.25s ease-out;
+    -webkit-transition: -webkit-transform 0.25s ease-out;
+    &.type_code {
+      transform: translate3d(-50%, 0, 0);
+      -webkit-transform: translate3d(-50%, 0, 0);
     }
   }
-  .pageview {
-    background: url(../images/login_bg.jpg) no-repeat left bottom;
-    background-size: 100% auto;
+  .l_item {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 0 r(80);
+    float: left;
   }
-  .login {
-    margin-bottom: r(72);
-    font-size: r(30);
-    width:100%;
-    overflow:hidden;
 
-    .login_tips {
-      font-size: r(28);
-      color: #494a4d;
-      background-color: #e4e2de;
-      height: r(80);
-      line-height: r(80);
-      text-align: center;
-      margin-bottom: r(80);
-    }
-    .login_wrap{
-      width:200%;
-      transition: transform 0.25s ease-out;
-      -webkit-transition:-webkit-transform 0.25s ease-out;
-      &.type_code{
-        transform: translate3d(-50%, 0, 0);
-        -webkit-transform: translate3d(-50%, 0, 0);
-      }
-    }
-    .l_item {
-      width:50%;
-      box-sizing:border-box;
-      padding: 0 r(80);
-      float:left;
-    }
-
-    .input_panel {
+  .input_panel {
     padding: 0 0 0 r(60);
 
-      li {
-        color: #434343;
-        padding: r(30) r(10);
+    li {
+      color: #434343;
+      padding: r(30) r(10);
+      display: block;
+      position: relative;
+      border-bottom: 1px solid #efefef;
+
+      .l {
+        position: absolute;
+        left: r(-60);
+        top: r(30);
         display: block;
-        position: relative;
-        border-bottom: 1px solid #efefef;
-
-        .l {
-          position: absolute;
-          left: r(-60);
-          top: r(30);
-          display: block;
-        }
-        .r{
-          position: absolute;
-          right: r(25);
-          top: r(35);
-          display: block;
-        }
-        input {
-          width: 100%;
-          border: none;
-          vertical-align: middle;
-          color: #434343;
-          &#password{
-            width: 80%;
-          }
-          &#login_name_2{
-            width:60%;
-          }
-          &.code_btn{
-            width:auto;
-            border:1px solid #850d0d;
-            padding: r(10) r(15);
-            color:#850d0d;
-            font-size: r(28);
-            border-radius: r(5);
-            position: absolute;
-            top: r(25);
-            right: 0;
-            &:active{
-              background-color: #592726;
-              color: #fff;
-            }
-            &:disabled{
-              border-color:#ccc;
-              color:#ccc;
-            }
-          }
-        }
       }
-    }
-
-    .btns {
-      padding: r(60) 0 0 0;
-
-      .btn_red {
-        background-color: #850d0d;
+      .r {
+        position: absolute;
+        right: r(25);
+        top: r(35);
+        display: block;
+      }
+      input {
         width: 100%;
-        text-align: center;
-        border-radius: .067rem;
-        color: #fff;
-        font-size: .453rem;
-        padding: .36rem 0 .36rem 0;
         border: none;
-        &:active{
-          background-color: #592726;
+        vertical-align: middle;
+        color: #434343;
+        &#password {
+          width: 80%;
         }
-      }
-
-      .reg {
-        padding-top: r(40);
-
-        a {
+        &#login_name_2 {
+          width: 60%;
+        }
+        &.code_btn {
+          width: auto;
+          border: 1px solid #850d0d;
+          padding: r(10) r(15);
+          color: #850d0d;
           font-size: r(28);
-          color: #333;
-        }
-      }
-    }
-
-    .others {
-      margin-top: r(200);
-
-      h2 {
-        margin: 0 .4rem;
-        text-align: center;
-        position: relative;
-        font-size: r(24);
-        font-weight: 400;
-        color: #666;
-
-        &:before {
-          content: "";
-          display: block;
+          border-radius: r(5);
           position: absolute;
-          top: .2rem;
-          left: r(135);
-          @include wh(r(420), r(2));
-          background-color: #d3d3d3;
-        }
-
-        span {
-          position: relative;
-          padding: 0 .36rem;
-          background-color: #fbfbfb;
-        }
-      }
-
-      p {
-        text-align: center;
-        padding-top: r(30);
-        a {
-          display: inline-block;
-          width: r(150);
-        }
-        .login_ico {
-          display: block;
-          margin: 0 auto;
+          top: r(25);
+          right: 0;
+          &:active {
+            background-color: #592726;
+            color: #fff;
+          }
+          &:disabled {
+            border-color: #ccc;
+            color: #ccc;
+          }
         }
       }
     }
   }
 
+  .btns {
+    padding: r(60) 0 0 0;
+
+    .btn_red {
+      background-color: #850d0d;
+      width: 100%;
+      text-align: center;
+      border-radius: 0.067rem;
+      color: #fff;
+      font-size: 0.453rem;
+      padding: 0.36rem 0 0.36rem 0;
+      border: none;
+      &:active {
+        background-color: #592726;
+      }
+    }
+
+    .reg {
+      padding-top: r(40);
+
+      a {
+        font-size: r(28);
+        color: #333;
+      }
+    }
+  }
+
+  .others {
+    margin-top: r(200);
+
+    h2 {
+      margin: 0 0.4rem;
+      text-align: center;
+      position: relative;
+      font-size: r(24);
+      font-weight: 400;
+      color: #666;
+
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0.2rem;
+        left: r(135);
+        @include wh(r(420), r(2));
+        background-color: #d3d3d3;
+      }
+
+      span {
+        position: relative;
+        padding: 0 0.36rem;
+        background-color: #fbfbfb;
+      }
+    }
+
+    p {
+      text-align: center;
+      padding-top: r(30);
+      a {
+        display: inline-block;
+        width: r(150);
+      }
+      .login_ico {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+}
 </style>

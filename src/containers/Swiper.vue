@@ -1,13 +1,26 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a class="back back_ico" href="javascript:void(0);" @click="goBack"></a><span
-        class="title">Swiper Demo</span></div>
+      <div class="container"><a
+          class="back back_ico"
+          href="javascript:void(0);"
+          @click="goBack"
+        ></a><span class="title">Swiper Demo</span></div>
     </header>
     <section class="main">
-      <swiper :options="swiperOption" class="my-swiper">
-        <swiper-slide v-for="slide in swiperSlides" :key="slide" class="item">I'm Slide {{ slide }}</swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
+      <swiper
+        :options="swiperOption"
+        class="my-swiper"
+      >
+        <swiper-slide
+          v-for="slide in swiperSlides"
+          :key="slide"
+          class="item"
+        >I'm Slide {{ slide }}</swiper-slide>
+        <div
+          class="swiper-pagination"
+          slot="pagination"
+        ></div>
       </swiper>
     </section>
   </article>
@@ -53,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../style/pix2rem/index';
+@import "../style/pix2rem/index";
 
 .my-swiper {
   .item {

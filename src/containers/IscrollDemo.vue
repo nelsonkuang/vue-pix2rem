@@ -1,15 +1,35 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a class="back back_ico" href="javascript:void(0);" @click="goBack"></a><span class="title">{{msg}}</span></div>
+      <div class="container"><a
+          class="back back_ico"
+          href="javascript:void(0);"
+          @click="goBack"
+        ></a><span class="title">{{msg}}</span></div>
     </header>
     <section class="main">
-      <iscroll-view  @pullUp="load" @pullDown="refresh" class="scroll-view" ref="scrollView" :options="{mouseWheel:true}">
+      <iscroll-view
+        @pullUp="load"
+        @pullDown="refresh"
+        class="scroll-view"
+        ref="scrollView"
+        :options="{mouseWheel:true}"
+      >
         <div style="height:1.333rem;">下拉刷新</div>
-        <ul v-if="userList.length" class="list">
-          <li v-for="item in userList" :key="item.id" class="item">{{item.name}}</li>
+        <ul
+          v-if="userList.length"
+          class="list"
+        >
+          <li
+            v-for="item in userList"
+            :key="item.id"
+            class="item"
+          >{{item.name}}</li>
         </ul>
-        <div v-show="noMoreData" style="padding:30px 0;">没有更多了...</div>
+        <div
+          v-show="noMoreData"
+          style="padding:30px 0;"
+        >没有更多了...</div>
       </iscroll-view>
       <transition name="loading">
         <p-loading v-show="isLoading"></p-loading>
@@ -116,15 +136,17 @@ export default {
   box-sizing: border-box;
   height: 100%;
 }
-.item{
+.item {
   border-bottom: 1px solid #dddddd;
   padding: 20px 0;
   display: block;
 }
-.loading-enter-active, .loading-leave-active {
-  transition: opacity 1s
+.loading-enter-active,
+.loading-leave-active {
+  transition: opacity 1s;
 }
-.loading-enter, .loading-leave-active {
-  opacity: 0
+.loading-enter,
+.loading-leave-active {
+  opacity: 0;
 }
 </style>

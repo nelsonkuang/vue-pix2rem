@@ -1,6 +1,13 @@
 <template>
-  <select v-model="selected" @change="() => onChange(selected)">
-    <option v-for="option in options" :value="option.val" :key="option.val">
+  <select
+    v-model="selected"
+    @change="() => onChange(selected)"
+  >
+    <option
+      v-for="option in options"
+      :value="option.val"
+      :key="option.val"
+    >
       {{ option.text }}
     </option>
   </select>

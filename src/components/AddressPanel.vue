@@ -9,7 +9,8 @@
           :onChange="onProvChange"
           class="a-select"
           id="prov_select"
-          name="province" />
+          name="province"
+        />
       </div>
     </li>
     <li class="clearfix">
@@ -21,7 +22,8 @@
           :onChange="onCityChange"
           class="a-select"
           id="city_select"
-          name="city" />
+          name="city"
+        />
       </div>
     </li>
     <li class="clearfix">
@@ -33,13 +35,21 @@
           :onChange="onRegionChange"
           class="a-select"
           id="region_select"
-          name="region" />
+          name="region"
+        />
       </div>
     </li>
     <li class="clearfix">
       <div class="fl a">具体地址</div>
       <div class="fl b">
-        <textarea id="address" name="address" class="text" v-model="addressInDetail" placeholder="请填写具体地址" required=""></textarea>
+        <textarea
+          id="address"
+          name="address"
+          class="text"
+          v-model="addressInDetail"
+          placeholder="请填写具体地址"
+          required=""
+        ></textarea>
       </div>
     </li>
   </ul>
@@ -47,7 +57,7 @@
 
 <script>
 import ASelect from './ASelect'
-import {getAddressArrById} from '../util/cn-addrs'
+import { getAddressArrById } from '../util/cn-addrs'
 
 export default {
   name: 'AddressPanel',
@@ -135,35 +145,35 @@ export default {
 </script>
 
 <style scoped>
-  ul > li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-    background-color: white;
-  }
-  ul > li .a {
-    width: 24.9%;
-    box-sizing: border-box;
-    padding-left: 10px;
-    color: #333;
-    line-height: 39px;
-  }
-  ul > li .b {
-    width: 74.9%;
-    box-sizing: border-box;
-    padding-right: 10px;
-  }
-  ul > li .b > input,
-  ul > li .b select,
-  ul > li .b > textarea {
-    width: 100%;
-    color: #666;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-  }
-  ul > li .b .a-select {
-    background-size: 15px 10px;
-  }
+ul > li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+ul > li .a {
+  width: 24.9%;
+  box-sizing: border-box;
+  padding-left: 10px;
+  color: #333;
+  line-height: 39px;
+}
+ul > li .b {
+  width: 74.9%;
+  box-sizing: border-box;
+  padding-right: 10px;
+}
+ul > li .b > input,
+ul > li .b select,
+ul > li .b > textarea {
+  width: 100%;
+  color: #666;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+ul > li .b .a-select {
+  background-size: 15px 10px;
+}
 </style>

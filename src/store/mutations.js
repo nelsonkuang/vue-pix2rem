@@ -4,7 +4,7 @@ import {
   GET_USER_INFO
 } from './mutation-types.js'
 
-import {setStore, removeStore} from '../util/tools'
+import { setStore, removeStore } from '../util/tools'
 
 export default {
   [RECORD_USER_INFO] (state, info) { // 记录用户信息
@@ -25,7 +25,7 @@ export default {
       return
     }
     if (!info.message) {
-      state.userInfo = {...info}
+      state.userInfo = { ...info }
     } else {
       state.userInfo = null
     }

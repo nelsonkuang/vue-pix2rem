@@ -1,12 +1,22 @@
 <template>
   <div class="toast">
-   <div class="toast__mask" v-show="isShowMask"></div>
-   <transition :name="translate">
-    <div class="toast__box" :class="position" v-show="show">
-      <i :class="'toast__icon ' + icon" v-show="isShowIcon"></i>
-      <div class="toast__text">{{text}}</div>
-    </div>
-   </transition>
+    <div
+      class="toast__mask"
+      v-show="isShowMask"
+    ></div>
+    <transition :name="translate">
+      <div
+        class="toast__box"
+        :class="position"
+        v-show="show"
+      >
+        <i
+          :class="'toast__icon ' + icon"
+          v-show="isShowIcon"
+        ></i>
+        <div class="toast__text">{{text}}</div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -51,7 +61,7 @@ export default {
       default: false
     }
   },
-  mounted () {},
+  mounted () { },
   updated () {
     if (this.show) {
       if (this.timer) {
@@ -89,7 +99,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../../style/icon/weui-icon_font';
+@import "../../style/icon/weui-icon_font";
 .toast__box {
   position: fixed;
   padding: 20px;
@@ -120,8 +130,9 @@ export default {
     font-size: 55px;
   }
 }
-[class*=" weui-icon_"]:before, [class^=weui-icon_]:before {
-    margin: 0;
+[class*=" weui-icon_"]:before,
+[class^="weui-icon_"]:before {
+  margin: 0;
 }
 .toast__mask {
   position: fixed;
@@ -164,6 +175,6 @@ export default {
 .translate-bottom-enter,
 .translate-bottom-leave-to {
   transform: translate(-50%, 50px) !important;
-  opacity: 0.20;
+  opacity: 0.2;
 }
 </style>

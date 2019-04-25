@@ -2,8 +2,16 @@
   <div class="vscroller">
     <div class="vscroller__head">{{scrollerTitle}}</div>
     <div class="vscroller__body">
-      <ul :style="{ webkitTransition: '-webkit-transform ' + transitionDuration / 1000 + 's ease-out', transition: 'transform ' + transitionDuration / 1000 + 's ease-out', webkitTransform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)', transform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)' }" ref="ul">
-        <li v-for="item in itemList" :key="item.id" :data-val="item.value" :class="item.selected ? 'vselected' : ''">{{item.name}}</li>
+      <ul
+        :style="{ webkitTransition: '-webkit-transform ' + transitionDuration / 1000 + 's ease-out', transition: 'transform ' + transitionDuration / 1000 + 's ease-out', webkitTransform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)', transform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)' }"
+        ref="ul"
+      >
+        <li
+          v-for="item in itemList"
+          :key="item.id"
+          :data-val="item.value"
+          :class="item.selected ? 'vselected' : ''"
+        >{{item.name}}</li>
       </ul>
     </div>
   </div>
@@ -280,86 +288,86 @@ export default {
 </script>
 
 <style scoped>
-  .vscroller{
-    font-family: arial,verdana,sans-serif;
-    padding: .5em .25em;
-    min-width: 40px;
-    max-width: 100%;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 auto;
-    -ms-flex: 1 auto;
-    flex: 1 auto;
-    -ms-touch-action: none;
-    touch-action: none;
-    font-size: 16px;
-  }
-  .vscroller__head {
-    line-height: 30px;
-    height: 30px;
-    text-align: center;
-    white-space: nowrap;
-    font-weight: bold;
-    text-transform: upperscse;
-    color: #4eccc4;
-    width: 100%;
-    font-size: 1.375em;
-  }
-  .vscroller__body {
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-  }
-  .vscroller__body:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 80px;
-    bottom: auto;
-    right: auto;
-    height: 1px;
-    width: 100%;
-    background-color: #4eccc4;
-    display: block;
-    z-index: 1;
-  }
-  .vscroller__body:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 80px;
-    right: auto;
-    top: auto;
-    height: 1px;
-    width: 100%;
-    background-color: #4eccc4;
-    display: block;
-    z-index: 1;
-  }
-  .vscroller__body ul {
-    display: block;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    z-index: 3;
-    transform: translate3d(0px, 0px, 0px);
-  }
-  .vscroller__body li {
-    display: block;
-    height: 40px;
-    line-height: 40px;
-    cursor: pointer;
-    text-align: center;
-    padding: 0 5px;
-    margin: 0;
-    white-space: nowrap;
-    vertical-align: bottom;
-    width: 100%;
-    color: #454545;
-    position: relative;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .vscroller__body li.vselected {
-    font-weight: 700;
-  }
+.vscroller {
+  font-family: arial, verdana, sans-serif;
+  padding: 0.5em 0.25em;
+  min-width: 40px;
+  max-width: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 auto;
+  -ms-flex: 1 auto;
+  flex: 1 auto;
+  -ms-touch-action: none;
+  touch-action: none;
+  font-size: 16px;
+}
+.vscroller__head {
+  line-height: 30px;
+  height: 30px;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: bold;
+  text-transform: upperscse;
+  color: #4eccc4;
+  width: 100%;
+  font-size: 1.375em;
+}
+.vscroller__body {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+.vscroller__body:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 80px;
+  bottom: auto;
+  right: auto;
+  height: 1px;
+  width: 100%;
+  background-color: #4eccc4;
+  display: block;
+  z-index: 1;
+}
+.vscroller__body:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 80px;
+  right: auto;
+  top: auto;
+  height: 1px;
+  width: 100%;
+  background-color: #4eccc4;
+  display: block;
+  z-index: 1;
+}
+.vscroller__body ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 3;
+  transform: translate3d(0px, 0px, 0px);
+}
+.vscroller__body li {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  text-align: center;
+  padding: 0 5px;
+  margin: 0;
+  white-space: nowrap;
+  vertical-align: bottom;
+  width: 100%;
+  color: #454545;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vscroller__body li.vselected {
+  font-weight: 700;
+}
 </style>

@@ -1,24 +1,57 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a class="back back_ico" href="javascript:void(0);" @click="goBack"></a><span class="title">{{msg}}</span></div>
+      <div class="container"><a
+          class="back back_ico"
+          href="javascript:void(0);"
+          @click="goBack"
+        ></a><span class="title">{{msg}}</span></div>
     </header>
     <section class="main">
-      <div id="cp_container_1" class="cp-container">
-        <div class="cp-buffer-holder cp-gt50" style="display: block;"> <!-- .cp-gt50 only needed when buffer is > than 50% -->
-          <div class="cp-buffer-1" style="transform: rotate(180deg);"></div>
-          <div class="cp-buffer-2" style="transform: rotate(3600deg);"></div>
+      <div
+        id="cp_container_1"
+        class="cp-container"
+      >
+        <div
+          class="cp-buffer-holder cp-gt50"
+          style="display: block;"
+        >
+          <!-- .cp-gt50 only needed when buffer is > than 50% -->
+          <div
+            class="cp-buffer-1"
+            style="transform: rotate(180deg);"
+          ></div>
+          <div
+            class="cp-buffer-2"
+            style="transform: rotate(3600deg);"
+          ></div>
         </div>
-        <div class="cp-progress-holder" :class="{ 'cp-gt50' : progress > 50 }" style="display: block;"> <!-- .cp-gt50 only needed when progress is > than 50% -->
-          <div class="cp-progress-1" :style="'transform: rotate('+ currentDegL +'deg);'"></div>
-          <div class="cp-progress-2" :style="'transform: rotate('+ currentDegR +'deg);'"></div>
+        <div
+          class="cp-progress-holder"
+          :class="{ 'cp-gt50' : progress > 50 }"
+          style="display: block;"
+        >
+          <!-- .cp-gt50 only needed when progress is > than 50% -->
+          <div
+            class="cp-progress-1"
+            :style="'transform: rotate('+ currentDegL +'deg);'"
+          ></div>
+          <div
+            class="cp-progress-2"
+            :style="'transform: rotate('+ currentDegR +'deg);'"
+          ></div>
         </div>
         <div class="cp-progress-percent">
           {{progress}}%
         </div>
       </div>
       <div class="svg_circle">
-        <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          width="100%"
+          height="100%"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M153 334
                   C153 334 151 334 151 334
                   C151 339 153 344 156 344
@@ -111,7 +144,7 @@ export default {
 
 .cp-buffer-1,
 .cp-buffer-2 {
-  background: url('../images/buffer.png') 0 0 no-repeat;
+  background: url("../images/buffer.png") 0 0 no-repeat;
 }
 
 /* FALLBACK for .progress
@@ -120,13 +153,13 @@ export default {
  */
 
 .cp-container .cp-fallback {
-  background: url('../images/progress_sprite.jpg') no-repeat;
+  background: url("../images/progress_sprite.jpg") no-repeat;
   background-position: 0 104px;
 }
 
 .cp-progress-1,
 .cp-progress-2 {
-  background: url('../images/progress.png') 0 0 no-repeat;
+  background: url("../images/progress.png") 0 0 no-repeat;
 }
 
 .cp-buffer-holder,

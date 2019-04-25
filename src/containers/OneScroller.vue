@@ -1,11 +1,18 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a class="back back_ico" href="javascript:void(0);" @click="goBack"></a><span class="title">{{msg}}</span></div>
+      <div class="container"><a
+          class="back back_ico"
+          href="javascript:void(0);"
+          @click="goBack"
+        ></a><span class="title">{{msg}}</span></div>
     </header>
     <section class="main">
       <div class="wrap">
-        <scroller :scrollerTitle="vTitle" :itemList="vList"></scroller>
+        <scroller
+          :scrollerTitle="vTitle"
+          :itemList="vList"
+        ></scroller>
       </div>
       <div :style="{textAlign:'center', marginTop:'10px', fontWeight:'700'}">{{`Selected Item: ${selectedItem.name}, value is ${selectedItem.value}`}}</div>
     </section>
@@ -14,7 +21,7 @@
 
 <script>
 import Scroller from '../components/Scroller'
-import {goBack} from '../util/tools'
+import { goBack } from '../util/tools'
 export default {
   name: 'OneScroller',
   data () {
@@ -48,9 +55,9 @@ export default {
 </script>
 
 <style scoped>
-  .wrap {
-    width: 300px;
-    background: rgba(230,230,230,.5);
-    position: relative;
-  }
+.wrap {
+  width: 300px;
+  background: rgba(230, 230, 230, 0.5);
+  position: relative;
+}
 </style>
