@@ -3,7 +3,18 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+/**获取本机ip**/
+function getIPAddress () {
+  const interfaces = require('os').networkInterfaces()
+  let ipAddress = '127.0.0.1'
+  Object.keys(interfaces).forEach((_) => {
+    const result = interfaces[_].find((alias) => (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal))
+    if (result) {
+      ipAddress = result.address
+    }
+  })
+  return ipAddress
+}
 module.exports = {
   dev: {
 
@@ -14,7 +25,7 @@ module.exports = {
 
     // Various Dev Server settings
     // host: 'localhost', // can be overwritten by process.env.HOST
-    host: '10.9.112.185', // can be overwritten by process.env.HOST
+    host: getIPAddress(), // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

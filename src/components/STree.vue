@@ -522,7 +522,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .hide {
-  display: none;
+  display: none !important;
 }
 .stree {
   padding: 15px 5px 15px 0;

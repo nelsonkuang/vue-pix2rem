@@ -95,6 +95,13 @@ export default new Router({
         title: 'Simple Tree'
       },
       component: r => require.ensure([], () => r(require('@/containers/SimpleTree')), 'SimpleTree')
+    },
+    {
+      path: '/render-tree-demo',
+      meta: { // 动态设置meta
+        title: '渲染函数 Tree Demo'
+      },
+      component: r => require.ensure([], () => r(require('@/containers/RenderTreeDemo')), 'RenderTreeDemo')
     }
   ]
 })
