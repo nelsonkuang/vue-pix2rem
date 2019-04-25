@@ -1,6 +1,7 @@
 # vue-pix2rem
 
-> A Vue.js boilerplate project for mobile SPA with SASS, REM, Mockjs, Json-Server
+> My Vue.js Workbench Project For Vue SPA with SASS, REM, Mockjs, Json-Server...
+> 我的Vue练手工作台项目
 
 ## Build Setup
 
