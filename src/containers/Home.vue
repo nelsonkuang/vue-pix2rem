@@ -6,6 +6,9 @@
     <section class="main">
       <ul>
         <li>
+          <router-link to="render-tree-demo">渲染函数 Tree Demo</router-link>
+        </li>
+        <li>
           <router-link to="login">Login Demo</router-link>
         </li>
         <li>
@@ -37,12 +40,6 @@
         </li>
         <li>
           <router-link to="canvas">Canvas</router-link>
-        </li>
-        <li>
-          <router-link to="simple-tree">SimpleTree</router-link>
-        </li>
-        <li>
-          <router-link to="render-tree-demo">渲染函数 Tree Demo</router-link>
         </li>
         <li>developing...</li>
       </ul>
