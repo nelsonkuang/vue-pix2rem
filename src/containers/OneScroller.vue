@@ -1,20 +1,22 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <div class="wrap">
         <scroller
-          :scrollerTitle="vTitle"
-          :itemList="vList"
+          :scroller-title="vTitle"
+          :item-list="vList"
         ></scroller>
       </div>
-      <div :style="{textAlign:'center', marginTop:'10px', fontWeight:'700'}">{{`Selected Item: ${selectedItem.name}, value is ${selectedItem.value}`}}</div>
+      <div :style="{textAlign:'center', marginTop:'10px', fontWeight:'700'}">{{ `Selected Item: ${selectedItem.name}, value is ${selectedItem.value}` }}</div>
     </section>
   </article>
 </template>
@@ -24,6 +26,9 @@ import Scroller from '../components/Scroller'
 import { goBack } from '../util/tools'
 export default {
   name: 'OneScroller',
+  components: {
+    Scroller
+  },
   data () {
     return {
       vList: [
@@ -40,17 +45,14 @@ export default {
       msg: 'One Scroller'
     }
   },
-  components: {
-    Scroller
-  },
-  methods: {
-    goBack: goBack
-  },
   computed: {
     selectedItem: function () {
       return this.vList.find(item => item.selected)
     }
-  }
+  },
+  methods: {
+    goBack: goBack
+  },
 }
 </script>
 

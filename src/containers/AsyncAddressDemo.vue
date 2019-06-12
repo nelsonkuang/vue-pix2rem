@@ -1,19 +1,21 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <AddressPanel
-        :initProvSelectedVal="address.prov"
-        :initCitySelectedVal="address.city"
-        :initRegionSelectedVal="address.region"
-        :initAddressInDetail="address.inDetail"
         ref="myAddress"
+        :init-prov-selected-val="address.prov"
+        :init-city-selected-val="address.city"
+        :init-region-selected-val="address.region"
+        :init-address-in-detail="address.inDetail"
       >
       </AddressPanel>
       <div :style="{textAlign:'center', marginTop:'20px'}">
@@ -22,21 +24,21 @@
           @click="getCurrentAddress"
         >点击更新到下面当前填写地址信息</button>
         <button
+          :disabled="updating"
           class="btn"
           style="margin-left: 20px;"
           @click="updateCurrentAddress"
-          :disabled="updating"
-        >{{updateBtnText}}</button>
+        >{{ updateBtnText }}</button>
       </div>
       <div :style="{textAlign:'left', marginTop:'20px', padding: 20}">
         <pre style="background-color: #000;color: #fff;padding: 10px;">
-          {{JSON.stringify(currentAddress, null, 2)}}
+          {{ JSON.stringify(currentAddress, null, 2) }}
         </pre>
       </div>
       <!--加载中-->
       <div
-        class="spinner spinner-gritcode spinner-md"
         v-if="loading"
+        class="spinner spinner-gritcode spinner-md"
       >
         <div class="spinner-wrapper">
           <div class="spinner-circle"></div>
@@ -54,6 +56,9 @@ import { fetchAddress, updateAddress } from '../service'
 
 export default {
   name: 'AsyncAddressDemo',
+  components: {
+    AddressPanel
+  },
   data () {
     return {
       msg: '省市区地址填写 二',
@@ -69,18 +74,15 @@ export default {
       currentAddress: {}
     }
   },
-  created () {
-    this.fetchData()
-  },
   watch: {
     // call again the method if the route changes
     '$route': 'fetchData'
   },
+  created () {
+    this.fetchData()
+  },
   mounted () {
     this.getCurrentAddress()
-  },
-  components: {
-    AddressPanel
   },
   methods: {
     goBack: goBack,

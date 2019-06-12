@@ -1,25 +1,27 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <canvas
         id="canvas"
-        class="canvas"
         ref="canvas"
+        class="canvas"
         width="413"
         height="374"
       ></canvas>
 
       <canvas
         id="canvas_2"
-        class="canvas_2"
         ref="canvas_2"
+        class="canvas_2"
         width="300"
         height="300"
       ></canvas>
@@ -33,10 +35,14 @@ import QRCode from 'qrcode'
 
 export default {
   name: 'Canvas',
+  components: {
+  },
   data () {
     return {
       msg: 'Workbench'
     }
+  },
+  computed: {
   },
   created () {
   },
@@ -69,10 +75,6 @@ export default {
         })
       }
     })
-  },
-  components: {
-  },
-  computed: {
   },
   methods: {
     goBack: goBack

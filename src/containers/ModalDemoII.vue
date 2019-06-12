@@ -1,11 +1,13 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <button
@@ -35,12 +37,12 @@
       <!-- use the modal component, pass in the prop -->
       <modal
         :show="modalProps.show"
-        :showOk="modalProps.showOk"
-        :showCancel="modalProps.showCancel"
-        :okText="modalProps.okText"
-        :cancelText="modalProps.cancelText"
-        :okCallback="modalProps.okCallback"
-        :cancelCallback="modalProps.cancelCallback"
+        :show-ok="modalProps.showOk"
+        :show-cancel="modalProps.showCancel"
+        :ok-text="modalProps.okText"
+        :cancel-text="modalProps.cancelText"
+        :ok-callback="modalProps.okCallback"
+        :cancel-callback="modalProps.cancelCallback"
         :duration="modalProps.duration"
       >
         <strong slot="header">Support Slot</strong>
@@ -60,6 +62,9 @@ import Modal from '../components/Modal'
 import { goBack, extend } from '../util/tools'
 export default {
   name: 'ModalDemoII',
+  components: {
+    Modal
+  },
   data () {
     return {
       msg: 'Modal Demo II - Using Slot',
@@ -78,9 +83,6 @@ export default {
         duration: 0
       }
     }
-  },
-  components: {
-    Modal
   },
   methods: {
     goBack: goBack,

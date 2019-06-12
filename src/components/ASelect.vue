@@ -17,8 +17,18 @@
 export default {
   name: 'ASelect',
   props: {
-    initSelectedVal: String,
-    optionArr: Array,
+    initSelectedVal: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    optionArr: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
     onChange: {
       type: Function,
       default: function () {

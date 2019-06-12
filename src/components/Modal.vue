@@ -1,8 +1,8 @@
 <template>
   <transition name="fade">
     <div
-      class="modal-mask"
       v-show="show"
+      class="modal-mask"
     >
       <div class="modal-wrapper">
         <div class="modal-container">
@@ -20,28 +20,25 @@
           </div>
 
           <div
-            class="modal-footer"
             :class="{'border-none': !showCancel && !showOk}"
+            class="modal-footer"
           >
             <slot name="footer">
-
               <button
-                class="modal-default-button modal-button-ok"
-                :class="{'border-none': !showCancel===true}"
                 v-if="showOk"
+                :class="{'border-none': !showCancel===true}"
+                class="modal-default-button modal-button-ok"
                 @click="okCallback()"
               >
                 {{ okText }}
               </button>
-
               <button
-                class="modal-default-button modal-button-cancel"
                 v-if="showCancel"
+                class="modal-default-button modal-button-cancel"
                 @click="cancelCallback()"
               >
                 {{ cancelText }}
               </button>
-
             </slot>
           </div>
         </div>

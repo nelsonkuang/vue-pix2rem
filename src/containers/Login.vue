@@ -8,55 +8,57 @@
           @click="goBack"
         ></a>
         <span class="title">登 录</span>
-        <div class="ctr_btns"><a
-            class="active"
+        <div class="ctr_btns">
+          <a
             id="reg"
+            class="active"
             href="javascript:void(0);"
-          >注册</a></div>
+          >注册</a>
+        </div>
       </div>
     </header>
     <section class="main login">
       <div class="login_tips">动态验证码登录，无需设置密码，更安全</div>
       <div
-        class="login_wrap clearfix"
-        :class="{type_code: typeCode}"
         id="login_wrap"
+        :class="{type_code: typeCode}"
+        class="login_wrap clearfix"
       >
         <div
-          class="l_item normal_login"
           id="normal_login"
+          class="l_item normal_login"
         >
           <div class="input_panel">
             <ul>
               <li
-                class="hint--top  hint--error hint--rounded active"
                 :data-hint="phoneForPswMsg"
+                class="hint--top  hint--error hint--rounded active"
               >
                 <i class="login_ico ph l"></i><input
+                  v-focus
+                  id="login_name"
+                  v-model="phoneForPsw"
                   type="number"
                   name="phone"
-                  v-model="phoneForPsw"
-                  id="login_name"
                   placeholder="请输入手机号码"
                   @blur="phoneCheck"
-                  v-focus
                 >
               </li>
               <li
-                class="hint--top  hint--error hint--rounded active"
                 :data-hint="pswMsg"
+                class="hint--top  hint--error hint--rounded active"
               >
                 <i class="login_ico lock l"></i><input
-                  :type="eyeOpen ? 'text' : 'password'"
-                  name="password"
-                  v-model="psw"
                   id="password"
+                  :type="eyeOpen ? 'text' : 'password'"
+                  v-model="psw"
+                  name="password"
                   placeholder="请输入密码"
                   @blur="pswCheck"
                 ><i
-                  class="login_ico eye r"
-                  :class="{open: eyeOpen}"
                   id="eye"
+                  :class="{open: eyeOpen}"
+                  class="login_ico eye r"
                   @click="toggleEye"
                 ></i>
               </li>
@@ -64,17 +66,17 @@
           </div>
           <div class="btns">
             <input
+              id="login_btn"
               type="submit"
               class="btn_red"
               value="登      录"
-              id="login_btn"
               @click="submitPswForm"
             >
             <div class="clearfix reg">
               <a
+                id="switch_to_2"
                 class="fl"
                 href="javascript:void(0);"
-                id="switch_to_2"
                 @click="toggleLoginType"
               >动态验证码登录</a><a
                 class="fr"
@@ -85,41 +87,41 @@
           </div>
         </div>
         <div
-          class="l_item code_login"
           id="code_login"
+          class="l_item code_login"
         >
           <div class="input_panel">
             <ul>
               <li
-                class="hint--top  hint--error hint--rounded active"
                 :data-hint="phoneForCodeMsg"
+                class="hint--top  hint--error hint--rounded active"
               >
                 <i class="login_ico ph l"></i><input
+                  id="login_name_2"
+                  v-model="phoneForCode"
                   type="number"
                   name="phone"
-                  v-model="phoneForCode"
-                  id="login_name_2"
                   placeholder="请输入手机号码"
                   @blur="phoneCheck"
                 >
                 <input
+                  id="send_code"
+                  :value="verifiedCodeBtnText"
+                  :disabled="verifiedCodeDisabled"
                   type="button"
                   class="code_btn"
-                  :value="verifiedCodeBtnText"
-                  id="send_code"
                   @click="getVerifyCode"
-                  :disabled="verifiedCodeDisabled"
                 >
               </li>
               <li
-                class="hint--top  hint--error hint--rounded active"
                 :data-hint="verifiedCodeMsg"
+                class="hint--top  hint--error hint--rounded active"
               >
                 <i class="login_ico key l"></i><input
+                  id="code"
+                  v-model="verifiedCode"
                   type="text"
                   name="code"
-                  v-model="verifiedCode"
-                  id="code"
                   placeholder="请输入验证码"
                   @blur="verifiedCodeCheck"
                 >
@@ -128,17 +130,17 @@
           </div>
           <div class="btns">
             <input
+              id="login_btn_2"
               type="submit"
               class="btn_red"
               value="登      录"
-              id="login_btn_2"
               @click="submitCodeForm"
             >
             <div class="clearfix reg">
               <a
+                id="switch_to_1"
                 class="fl"
                 href="javascript:void(0);"
-                id="switch_to_1"
                 @click="toggleLoginType"
               >密码登录</a>
             </div>
@@ -155,14 +157,14 @@
       <!-- use the modal component, pass in the prop -->
       <modal
         :show="modalProps.show"
-        :showOk="modalProps.showOk"
-        :showCancel="modalProps.showCancel"
-        :okText="modalProps.okText"
-        :cancelText="modalProps.cancelText"
+        :show-ok="modalProps.showOk"
+        :show-cancel="modalProps.showCancel"
+        :ok-text="modalProps.okText"
+        :cancel-text="modalProps.cancelText"
         :header="modalProps.header"
         :body="modalProps.body"
-        :okCallback="modalProps.okCallback"
-        :cancelCallback="modalProps.cancelCallback"
+        :ok-callback="modalProps.okCallback"
+        :cancel-callback="modalProps.cancelCallback"
         :duration="modalProps.duration"
       ></modal>
     </section>
@@ -176,6 +178,9 @@ import { goBack, isMobileNumber, extend } from '../util/tools'
 import { userPswLogin, userCodeLogin } from '../service'
 export default {
   name: 'Login',
+  components: {
+    Modal
+  },
   data () {
     return {
       typeCode: false,
@@ -210,8 +215,10 @@ export default {
       }
     }
   },
-  components: {
-    Modal
+  computed: {
+    ...mapState([
+      'userInfo'
+    ])
   },
   mounted () {
     if (this.userInfo && this.userInfo.id) {
@@ -414,11 +421,6 @@ export default {
         }, opts.duration)
       }
     }
-  },
-  computed: {
-    ...mapState([
-      'userInfo'
-    ])
   }
 }
 </script>

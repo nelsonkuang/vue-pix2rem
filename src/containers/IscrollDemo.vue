@@ -1,19 +1,21 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <iscroll-view
-        @pullUp="load"
-        @pullDown="refresh"
-        class="scroll-view"
         ref="scrollView"
         :options="{mouseWheel:true}"
+        class="scroll-view"
+        @pullUp="load"
+        @pullDown="refresh"
       >
         <div style="height:1.333rem;">下拉刷新</div>
         <ul
@@ -24,7 +26,7 @@
             v-for="item in userList"
             :key="item.id"
             class="item"
-          >{{item.name}}</li>
+          >{{ item.name }}</li>
         </ul>
         <div
           v-show="noMoreData"
@@ -55,7 +57,10 @@ import IScroll from 'iscroll'
 Vue.use(IScrollView, IScroll)
 
 export default {
-  name: 'iscroll-demo',
+  name: 'IscrollDemo',
+  components: {
+    IScrollView
+  },
   data () {
     return {
       msg: 'Iscroll Demo',
@@ -71,9 +76,6 @@ export default {
   },
   mounted () {
     this.getUsersByPage(this.currentPage)
-  },
-  components: {
-    IScrollView
   },
   methods: {
     goBack: goBack,

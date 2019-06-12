@@ -4,11 +4,11 @@
       <div class="fl a">省份</div>
       <div class="fl b">
         <ASelect
-          :initSelectedVal="initProvSelectedVal"
-          :optionArr="provArr"
-          :onChange="onProvChange"
-          class="a-select"
           id="prov_select"
+          :init-selected-val="initProvSelectedVal"
+          :option-arr="provArr"
+          :on-change="onProvChange"
+          class="a-select"
           name="province"
         />
       </div>
@@ -17,11 +17,11 @@
       <div class="fl a">市</div>
       <div class="fl b">
         <ASelect
-          :initSelectedVal="initCitySelectedVal"
-          :optionArr="cityArr"
-          :onChange="onCityChange"
-          class="a-select"
           id="city_select"
+          :init-selected-val="initCitySelectedVal"
+          :option-arr="cityArr"
+          :on-change="onCityChange"
+          class="a-select"
           name="city"
         />
       </div>
@@ -30,11 +30,11 @@
       <div class="fl a">区/县</div>
       <div class="fl b">
         <ASelect
-          :initSelectedVal="initRegionSelectedVal"
-          :optionArr="regionArr"
-          :onChange="onRegionChange"
-          class="a-select"
           id="region_select"
+          :init-selected-val="initRegionSelectedVal"
+          :option-arr="regionArr"
+          :on-change="onRegionChange"
+          class="a-select"
           name="region"
         />
       </div>
@@ -44,9 +44,9 @@
       <div class="fl b">
         <textarea
           id="address"
+          v-model="addressInDetail"
           name="address"
           class="text"
-          v-model="addressInDetail"
           placeholder="请填写具体地址"
           required=""
         ></textarea>
@@ -65,10 +65,30 @@ export default {
     ASelect
   },
   props: {
-    initProvSelectedVal: String,
-    initCitySelectedVal: String,
-    initRegionSelectedVal: String,
-    initAddressInDetail: String
+    initProvSelectedVal: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    initCitySelectedVal: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    initRegionSelectedVal: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    initAddressInDetail: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    }
   },
   data () {
     return {
@@ -79,6 +99,30 @@ export default {
       citySelected: this.initCitySelectedVal || '0',
       regionSelected: this.initRegionSelectedVal || '0',
       addressInDetail: this.initAddressInDetail || ''
+    }
+  },
+  watch: {
+    'initProvSelectedVal': function () {
+      if (this.initProvSelectedVal !== '0' && this.initProvSelectedVal !== 0) {
+        this.cityArr = getAddressArrById(this.initProvSelectedVal)
+      } else {
+        this.cityArr = []
+      }
+      this.provSelected = this.initProvSelectedVal
+    },
+    'initCitySelectedVal': function () {
+      if (this.initCitySelectedVal !== '0' && this.initCitySelectedVal !== 0) {
+        this.regionArr = getAddressArrById(this.initCitySelectedVal)
+      } else {
+        this.regionArr = []
+      }
+      this.citySelected = this.initCitySelectedVal
+    },
+    'initRegionSelectedVal': function () {
+      this.onRegionChange(this.initRegionSelectedVal)
+    },
+    'initAddressInDetail': function () {
+      this.addressInDetail = this.initAddressInDetail || ''
     }
   },
   methods: {
@@ -117,30 +161,6 @@ export default {
       }
     }
   },
-  watch: {
-    'initProvSelectedVal': function () {
-      if (this.initProvSelectedVal !== '0' && this.initProvSelectedVal !== 0) {
-        this.cityArr = getAddressArrById(this.initProvSelectedVal)
-      } else {
-        this.cityArr = []
-      }
-      this.provSelected = this.initProvSelectedVal
-    },
-    'initCitySelectedVal': function () {
-      if (this.initCitySelectedVal !== '0' && this.initCitySelectedVal !== 0) {
-        this.regionArr = getAddressArrById(this.initCitySelectedVal)
-      } else {
-        this.regionArr = []
-      }
-      this.citySelected = this.initCitySelectedVal
-    },
-    'initRegionSelectedVal': function () {
-      this.onRegionChange(this.initRegionSelectedVal)
-    },
-    'initAddressInDetail': function () {
-      this.addressInDetail = this.initAddressInDetail || ''
-    }
-  }
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><span class="title">{{msg}}</span></div>
+      <div class="container"><span class="title">{{ msg }}</span></div>
     </header>
     <section class="main">
       <ul>
@@ -43,19 +43,21 @@
         </li>
         <li>developing...</li>
       </ul>
-      <div style="text-align: center;"><a
+      <div style="text-align: center;">
+        <a
+          v-if="!!userInfo"
           href="javascript:void(0);"
           style="color: #70aefc;"
-          v-if="!!userInfo"
           @click="logout"
-        >退出登录，</a>欢迎用户：{{ userInfo ? userInfo.username : '游客' }}</div>
-      <div style="text-align: center;margin-top:20px;">当前时间：{{now | parseTime('{y}年{m}月{d}日 {h}:{i}:{s} 星期{a}')}}</div>
+        >退出登录，</a>欢迎用户：{{ userInfo ? userInfo.username : '游客' }}
+      </div>
+      <div style="text-align: center;margin-top:20px;">当前时间：{{ now | parseTime('{y}年{m}月{d}日 {h}:{i}:{s} 星期{a}') }}</div>
       <transition name="fade">
         <div
-          class="alert-tips"
-          v-if="tipsOn"
           v-click-outside="closeTips"
-        >{{tips}}</div>
+          v-if="tipsOn"
+          class="alert-tips"
+        >{{ tips }}</div>
       </transition>
     </section>
   </article>
@@ -73,6 +75,12 @@ export default {
       tipsOn: false,
       now: new Date()
     }
+  },
+  computed: {
+    ...mapState([
+      'userInfo',
+      'login'
+    ])
   },
   beforeCreate () {
     /* console.group('beforeCreate 创建前状态===============》')
@@ -147,12 +155,6 @@ export default {
       this.tips = msg
       this.tipsOn = true
     }
-  },
-  computed: {
-    ...mapState([
-      'userInfo',
-      'login'
-    ])
   }
 }
 </script>

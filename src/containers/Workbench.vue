@@ -1,55 +1,57 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <div
         style="text-align: center;"
         @click="testNextTick"
-      >Getter测试：当前用户 - {{username}} - 点击进行nextTick测试</div>
+      >Getter测试：当前用户 - {{ username }} - 点击进行nextTick测试</div>
       <div
+        v-ripple="{color:'#fff', duration: 200}"
         class="btn"
         @click="topToast"
-        v-ripple="{color:'#fff', duration: 200}"
       >top toast</div>
       <div
+        v-ripple="{color:'#000', duration: 300}"
         class="btn"
         @click="centerToast"
-        v-ripple="{color:'#000', duration: 300}"
       >center toast</div>
       <div
+        v-ripple="{color:'red', duration: 400}"
         class="btn"
         @click="bottomToast"
-        v-ripple="{color:'red', duration: 400}"
       >bottom toast</div>
       <div
+        v-ripple="{color:'green', duration: 500}"
         class="btn"
         @click="iconToast"
-        v-ripple="{color:'green', duration: 500}"
       >icon toast</div>
       <vue-dropzone
-        ref="myVueDropzone"
         id="dropzone"
+        ref="myVueDropzone"
         :options="dropzoneOptions"
       ></vue-dropzone>
       <vue-core-image-upload
         :class="['btn', 'btn-primary']"
         :crop="'local'"
-        @imageuploaded="imageuploaded"
         :max-file-size="5242880"
         url="https://httpbin.org/post"
+        @imageuploaded="imageuploaded"
       >
       </vue-core-image-upload>
       <div>
-        <div>absolute: {{absolute}}</div>
-        <div>alpha: {{alpha}}</div>
-        <div>beta: {{beta}}</div>
-        <div>gamma: {{gamma}}</div>
+        <div>absolute: {{ absolute }}</div>
+        <div>alpha: {{ alpha }}</div>
+        <div>beta: {{ beta }}</div>
+        <div>gamma: {{ gamma }}</div>
       </div>
     </section>
   </article>
@@ -85,6 +87,9 @@ export default {
       gamma: ''
     }
   },
+  computed: {
+    ...mapGetters(['username'])
+  },
   created () {
   },
   mounted () {
@@ -96,9 +101,6 @@ export default {
     console.log('quickSort', this.quickSort([10, 5, 2, 4, 3, 654, 0]))
     console.log('getFibonacci', this.getFibonacci(15))
     window.addEventListener('deviceorientation', this.handleDeviceOrientation, true)
-  },
-  computed: {
-    ...mapGetters(['username'])
   },
   methods: {
     goBack: goBack,

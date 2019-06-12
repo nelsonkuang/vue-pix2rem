@@ -1,11 +1,13 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <div
@@ -142,14 +144,14 @@ export default {
   },
   computed: {
   },
-  methods: {
-    goBack: goBack
-  },
   created () { },
   mounted () {
   },
   beforeDestroy () {
-  }
+  },
+  methods: {
+    goBack: goBack
+  },
 }
 </script>
 

@@ -1,11 +1,13 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">{{msg}}</span></div>
+        ></a><span class="title">{{ msg }}</span>
+      </div>
     </header>
     <section class="main">
       <div
@@ -27,22 +29,22 @@
           ></div>
         </div>
         <div
-          class="cp-progress-holder"
           :class="{ 'cp-gt50' : progress > 50 }"
+          class="cp-progress-holder"
           style="display: block;"
         >
           <!-- .cp-gt50 only needed when progress is > than 50% -->
           <div
-            class="cp-progress-1"
             :style="'transform: rotate('+ currentDegL +'deg);'"
+            class="cp-progress-1"
           ></div>
           <div
-            class="cp-progress-2"
             :style="'transform: rotate('+ currentDegR +'deg);'"
+            class="cp-progress-2"
           ></div>
         </div>
         <div class="cp-progress-percent">
-          {{progress}}%
+          {{ progress }}%
         </div>
       </div>
       <div class="svg_circle">
@@ -52,7 +54,8 @@
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M153 334
+          <path 
+            d="M153 334
                   C153 334 151 334 151 334
                   C151 339 153 344 156 344
                   C164 344 171 339 171 334
@@ -76,11 +79,20 @@ import { goBack } from '../util/tools'
 
 export default {
   name: 'ProgressCircle',
+  components: {},
   data () {
     return {
       msg: 'ProgressCircle',
       progress: 0,
       timer: null
+    }
+  },
+  computed: {
+    currentDegR () {
+      return ~~(this.progress * 360 / 100)
+    },
+    currentDegL () {
+      return this.progress > 50 ? 180 : this.currentDegR
     }
   },
   created () { },
@@ -95,15 +107,6 @@ export default {
   },
   beforeDestroy () {
     this.timer && clearInterval(this.timer)
-  },
-  components: {},
-  computed: {
-    currentDegR () {
-      return ~~(this.progress * 360 / 100)
-    },
-    currentDegL () {
-      return this.progress > 50 ? 180 : this.currentDegR
-    }
   },
   methods: {
     goBack: goBack

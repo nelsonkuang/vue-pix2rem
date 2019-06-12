@@ -1,11 +1,13 @@
 <template>
   <article class="pageview">
     <header class="header fixed">
-      <div class="container"><a
+      <div class="container">
+        <a
           class="back back_ico"
           href="javascript:void(0);"
           @click="goBack"
-        ></a><span class="title">Swiper Demo</span></div>
+        ></a><span class="title">Swiper Demo</span>
+      </div>
     </header>
     <section class="main">
       <swiper
@@ -18,8 +20,8 @@
           class="item"
         >I'm Slide {{ slide }}</swiper-slide>
         <div
-          class="swiper-pagination"
           slot="pagination"
+          class="swiper-pagination"
         ></div>
       </swiper>
     </section>
@@ -33,6 +35,10 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
   name: 'Swiper',
+  components: {
+    swiper,
+    swiperSlide
+  },
   data () {
     return {
       swiperOption: {
@@ -44,13 +50,6 @@ export default {
       timer: null
     }
   },
-  components: {
-    swiper,
-    swiperSlide
-  },
-  methods: {
-    goBack: goBack
-  },
   mounted () {
     this.timer = setInterval(() => {
       console.log('simulate async data')
@@ -61,7 +60,10 @@ export default {
   },
   destroyed () {
     clearInterval(this.timer)
-  }
+  },
+  methods: {
+    goBack: goBack
+  },
 }
 </script>
 

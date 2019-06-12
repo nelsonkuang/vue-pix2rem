@@ -1,11 +1,11 @@
- <template>
+<template>
   <div
     id="spinner-box"
     class="spinner spinner-gritcode spinner-md"
   >
     <div class="spinner-wrapper">
       <div class="spinner-circle"></div>
-      <div class="spinner-text">{{msg}}</div>
+      <div class="spinner-text">{{ msg }}</div>
     </div>
   </div>
 </template>

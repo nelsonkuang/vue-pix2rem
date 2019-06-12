@@ -95,6 +95,13 @@ export default new Router({
         title: '渲染函数 Tree Demo'
       },
       component: r => require.ensure([], () => r(require('@/containers/RenderTreeDemo')), 'RenderTreeDemo')
+    },
+    {
+      path: '/a-map-demo',
+      meta: { // 动态设置meta
+        title: '高德地图 Demo'
+      },
+      component: r => require.ensure([], () => r(require('@/containers/AMapDemo')), 'AMapDemo')
     }
   ]
 })

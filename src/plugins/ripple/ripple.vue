@@ -43,9 +43,9 @@
 <template>
   <span class="ripple-container">
     <span
-      class="ripple"
-      :class="{'is-visible': isVisible, 'is-animated': isAnimated}"
       :style="styles"
+      :class="{'is-visible': isVisible, 'is-animated': isAnimated}"
+      class="ripple"
     ></span>
   </span>
 </template>
@@ -53,12 +53,15 @@
 export default {
   props: {
     isAnimated: {
+      type: Boolean,
       default: true
     },
     isVisible: {
+      type: Boolean,
       default: false
     },
     styles: {
+      type: Object,
       default: null
     }
   }

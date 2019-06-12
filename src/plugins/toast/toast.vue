@@ -1,20 +1,20 @@
 <template>
   <div class="toast">
     <div
-      class="toast__mask"
       v-show="isShowMask"
+      class="toast__mask"
     ></div>
     <transition :name="translate">
       <div
-        class="toast__box"
-        :class="position"
         v-show="show"
+        :class="position"
+        class="toast__box"
       >
         <i
-          :class="'toast__icon ' + icon"
           v-show="isShowIcon"
+          :class="'toast__icon ' + icon"
         ></i>
-        <div class="toast__text">{{text}}</div>
+        <div class="toast__text">{{ text }}</div>
       </div>
     </transition>
   </div>
@@ -22,33 +22,34 @@
 
 <script>
 export default {
-  data () {
-    return {
-      timer: null
-    }
-  },
   props: {
     show: {
       // 是否显示此toast
+      type: Boolean,
       default: false
     },
     text: {
       // 提醒文字
+      type: String,
       default: 'loading'
     },
     position: {
       // 提醒容器位置
+      type: String,
       default: 'center'
     },
     isShowMask: {
       // 是否显示遮罩层
+      type: Boolean,
       default: false
     },
     time: {
       // 显示时间
+      type: Number,
       default: 1500
     },
     transition: {
+      type: Boolean,
       // 是否开启动画
       default: true
     },
@@ -58,18 +59,13 @@ export default {
     },
     isShowIcon: {
       // 是否显示Icon
+      type: Boolean,
       default: false
     }
   },
-  mounted () { },
-  updated () {
-    if (this.show) {
-      if (this.timer) {
-        clearTimeout(this.timer)
-      }
-      this.timer = setTimeout(() => {
-        this.show = false
-      }, this.time)
+  data () {
+    return {
+      timer: null
     }
   },
   computed: {
@@ -95,7 +91,18 @@ export default {
         return 'fadeIn'
       }
     }
-  }
+  },
+  mounted () { },
+  updated () {
+    if (this.show) {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      this.timer = setTimeout(() => {
+        this.show = false
+      }, this.time)
+    }
+  },
 }
 </script>
 <style lang="scss">

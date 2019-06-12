@@ -1,17 +1,17 @@
 <template>
   <div class="vscroller">
-    <div class="vscroller__head">{{scrollerTitle}}</div>
+    <div class="vscroller__head">{{ scrollerTitle }}</div>
     <div class="vscroller__body">
       <ul
-        :style="{ webkitTransition: '-webkit-transform ' + transitionDuration / 1000 + 's ease-out', transition: 'transform ' + transitionDuration / 1000 + 's ease-out', webkitTransform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)', transform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)' }"
         ref="ul"
+        :style="{ webkitTransition: '-webkit-transform ' + transitionDuration / 1000 + 's ease-out', transition: 'transform ' + transitionDuration / 1000 + 's ease-out', webkitTransform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)', transform: 'translate3d(0px, ' + currentTranslatedY + 'px, 0px)' }"
       >
         <li
           v-for="item in itemList"
           :key="item.id"
           :data-val="item.value"
           :class="item.selected ? 'vselected' : ''"
-        >{{item.name}}</li>
+        >{{ item.name }}</li>
       </ul>
     </div>
   </div>
@@ -21,8 +21,18 @@
 export default {
   name: 'Scroller',
   props: {
-    scrollerTitle: String,
-    itemList: Array
+    scrollerTitle: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    itemList: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
   },
   data () {
     return {
@@ -43,6 +53,13 @@ export default {
       totalHeight: 40
     }
   },
+  computed: {
+  },
+  watch: {
+    itemList: () => {
+      this.totalHeight = this.itemList.length * 40
+    }
+  },
   created () {
   },
   mounted () {
@@ -57,8 +74,6 @@ export default {
       this.bindMouseEvents()
     }
     this.bindClickEvent()
-  },
-  computed: {
   },
   methods: {
     initData () {
@@ -279,11 +294,6 @@ export default {
       })
     }
   },
-  watch: {
-    itemList: () => {
-      this.totalHeight = this.itemList.length * 40
-    }
-  }
 }
 </script>
 
