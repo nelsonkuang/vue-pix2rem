@@ -25,12 +25,25 @@
         width="300"
         height="300"
       ></canvas>
+      <div id="target">
+        <div class="img"><img src="http://www.a4z.cn/img/miniprogramme.jpg"></div>
+        <div class="desc">这是我文字这是我文字这是我文字这是我文字这是我文字这是我文完</div>
+      </div>
+      <div id="my-containter">
+        <canvas
+          id="canvas_3"
+          ref="canvas_3"
+          class="canvas_3"
+          width="288"
+          height="480"
+        ></canvas>
+      </div>
     </section>
   </article>
 </template>
 
 <script>
-import { goBack, preLoadImage, createRoundRectPath, drawText, drawRoundImage } from '../util/tools'
+import { goBack, preLoadImage, createRoundRectPath, drawText, drawRoundImage, drawMultiLineText } from '../util/tools'
 import QRCode from 'qrcode'
 
 export default {
@@ -75,6 +88,21 @@ export default {
         })
       }
     })
+
+    // preLoadImage('http://www.a4z.cn/img/miniprogramme.jpg', function () {
+    //   setTimeout(() => {
+    //     // eslint-disable-next-line
+    //     html2canvas(document.querySelector('#target')).then(function (canvas) {
+    //       document.querySelector('#my-containter').appendChild(canvas)
+    //     })
+    //   }, 2000)
+    // })
+    let canvas2 = this.$refs.canvas_3
+    let ctx3 = canvas2.getContext('2d')
+    preLoadImage('http://www.a4z.cn/img/miniprogramme.jpg', function () {
+      ctx3.drawImage(this, 20, 20, 248, 350)
+      drawMultiLineText(ctx3, '本协议项下的任何争议，双方应友好协商解决。协商不成的，您同意将争议提交本协议签订地有管辖权的人民法院管辖', 20, 380, 150, '#000000')
+    })
   },
   methods: {
     goBack: goBack
@@ -83,6 +111,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../style/pix2rem/index";
 .btn {
   color: #fff;
   background-color: blueviolet;
@@ -90,5 +119,21 @@ export default {
   padding: 20px;
   margin: 10px auto;
   text-align: center;
+}
+#target {
+  margin: 0 auto;
+  padding: r(30);
+  width: r(320);
+  box-sizing: content-box;
+  .img {
+    width: r(320);
+    img {
+      width: 100%;
+      vertical-align: top;
+    }
+  }
+  .desc {
+    font-size: r(27);
+  }
 }
 </style>

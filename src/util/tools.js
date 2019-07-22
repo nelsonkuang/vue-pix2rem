@@ -676,6 +676,34 @@ export function drawText(ctx, text, x, y) {
   ctx.restore() // 恢复画布
 }
 
+export function drawMultiLineText(ctx, text, x, y, w, color) {
+  if(!text) {
+    return false
+  }
+  const chars = text.split('')
+  let tempStr = ''
+  let rows = []
+  chars.forEach((char) => {
+    if(ctx.measureText(tempStr).width >= w) {
+      rows.push(tempStr)
+      tempStr = ''
+    }
+    tempStr += char
+  })
+  rows.push(tempStr)
+
+  console.log(rows)
+
+  ctx.save() // 保存画布 用save及restore是为了不影响其他地方使用画布
+  ctx.font = '400 16px "Hiragino Sans GB W3","Microsoft YaHei",sans-serif'
+  ctx.textBaseline = 'middle'
+  ctx.fillStyle = color
+  rows.forEach((txt, n) => {
+    ctx.fillText(txt, x, y + n * 20) // ******使用FILLTEXT
+  })
+  ctx.restore() // 恢复画布
+}
+
 export function drawRoundImage(ctx, img, x, y, r) { // 创建圆形图片
   ctx.save()
   ctx.arc(x + r, y + r, r, 0, Math.PI * 2, true) // x + r , y + r, r, 0, arc,
