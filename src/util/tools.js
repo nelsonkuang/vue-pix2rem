@@ -351,23 +351,23 @@ export const loadMore = (element, callback) => {
     paddingBottom = getStyle(element, 'paddingBottom');
     marginBottom = getStyle(element, 'marginBottom');
   }, {
-    passive: true
-  })
+      passive: true
+    })
 
   //运动过程中保持监听 scrollTop 的值判断是否到达底部
   element.addEventListener('touchmove', () => {
     loadMore();
   }, {
-    passive: true
-  })
+      passive: true
+    })
 
   //运动结束时判断是否有惯性运动，惯性运动结束判断是非到达底部
   element.addEventListener('touchend', () => {
     oldScrollTop = document.body.scrollTop;
     moveEnd();
   }, {
-    passive: true
-  })
+      passive: true
+    })
 
   const moveEnd = () => {
     requestFram = requestAnimationFrame(() => {
@@ -404,21 +404,21 @@ export const showBack = callback => {
   document.addEventListener('touchstart', () => {
     showBackFun();
   }, {
-    passive: true
-  })
+      passive: true
+    })
 
   document.addEventListener('touchmove', () => {
     showBackFun();
   }, {
-    passive: true
-  })
+      passive: true
+    })
 
   document.addEventListener('touchend', () => {
     oldScrollTop = document.body.scrollTop;
     moveEnd();
   }, {
-    passive: true
-  })
+      passive: true
+    })
 
   const moveEnd = () => {
     requestFram = requestAnimationFrame(() => {
@@ -579,7 +579,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
  * Created by jiachenpan on 16/11/18.
  */
 
-export function parseTime(time, cFormat) {
+export function parseTime (time, cFormat) {
   if (arguments.length === 0) {
     return null
   }
@@ -611,7 +611,7 @@ export function parseTime(time, cFormat) {
   return time_str
 }
 
-export function formatTime(time, option) {
+export function formatTime (time, option) {
   time = +time * 1000
   const d = new Date(time)
   const now = Date.now()
@@ -634,7 +634,7 @@ export function formatTime(time, option) {
   }
 }
 
-export function preLoadImage(url, callback) { // fixed Chrome 图片load不出来问题
+export function preLoadImage (url, callback) { // fixed Chrome 图片load不出来问题
   let img = new Image() //创建一个Image对象，实现图片的预下载  
   img.src = url
 
@@ -647,7 +647,23 @@ export function preLoadImage(url, callback) { // fixed Chrome 图片load不出�
     callback && callback.call(img) //将回调函数的this替换为Image对象  
   }
 }
-export function createRoundRectPath(x, y, w, h, r) { // 创建圆角矩形
+
+export function preLoadCrossOriginImage (url, callback) { // fixed Chrome 图片load不出来问题
+  let img = new Image() //创建一个Image对象，实现图片的预下载  
+  img.crossOrigin = 'anonymous'
+  img.src = url
+
+  if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数  
+    callback && callback.call(img)
+    return // 直接返回，不用再处理onload事件  
+  }
+
+  img.onload = function () { //图片下载完毕时异步调用callback函数。  
+    callback && callback.call(img) //将回调函数的this替换为Image对象  
+  }
+}
+
+export function createRoundRectPath (x, y, w, h, r) { // 创建圆角矩形
   const path = new Path2D()
   path.moveTo(x + r, y)
   path.lineTo(x + w - r, y)
@@ -660,7 +676,7 @@ export function createRoundRectPath(x, y, w, h, r) { // 创建圆角矩形
   path.arc(x + r, y + r, r, Math.PI / 180 * 180, Math.PI / 180 * 270, false)
   return path
 }
-export function drawText(ctx, text, x, y) {
+export function drawText (ctx, text, x, y) {
   ctx.save() // 保存画布 用save及restore是为了不影响其他地方使用画布
   ctx.font = '400 16px "Hiragino Sans GB W3","Microsoft YaHei",sans-serif'
   let gd = ctx.createLinearGradient(0, 0, 400, 0) // (x0,y0,x1,y1)
@@ -676,15 +692,15 @@ export function drawText(ctx, text, x, y) {
   ctx.restore() // 恢复画布
 }
 
-export function drawMultiLineText(ctx, text, x, y, w, color) {
-  if(!text) {
+export function drawMultiLineText (ctx, text, x, y, w, color) {
+  if (!text) {
     return false
   }
   const chars = text.split('')
   let tempStr = ''
   let rows = []
   chars.forEach((char) => {
-    if(ctx.measureText(tempStr).width >= w) {
+    if (ctx.measureText(tempStr).width >= w) {
       rows.push(tempStr)
       tempStr = ''
     }
@@ -704,7 +720,7 @@ export function drawMultiLineText(ctx, text, x, y, w, color) {
   ctx.restore() // 恢复画布
 }
 
-export function drawRoundImage(ctx, img, x, y, r) { // 创建圆形图片
+export function drawRoundImage (ctx, img, x, y, r) { // 创建圆形图片
   ctx.save()
   ctx.arc(x + r, y + r, r, 0, Math.PI * 2, true) // x + r , y + r, r, 0, arc,
   ctx.clip()
