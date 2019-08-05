@@ -102,7 +102,7 @@ export default {
     let canvas2 = this.$refs.canvas_3
     let ctx3 = canvas2.getContext('2d')
     let This = this
-    preLoadCrossOriginImage('https://nuoche.51hutui.com/yisima/attachment/preview/57f4a2d50a2a45a782a913e5b544474e', function () {
+    preLoadCrossOriginImage('http://www.a4z.cn/img/miniprogramme.jpg', function () {
       ctx3.drawImage(this, 20, 20, 248, 350)
       drawMultiLineText(ctx3, '本协议项下的任何争议，双方应友好协商解决。协商不成的，您同意将争议提交本协议签订地有管辖权的人民法院管辖', 20, 380, 150, '#000000')
       This.qrcodeUrl = canvas2.toDataURL('image/jpeg', 1)
