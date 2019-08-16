@@ -53,6 +53,10 @@
         <div>beta: {{ beta }}</div>
         <div>gamma: {{ gamma }}</div>
       </div>
+      <div
+        class="marquee"
+        style="width:2rem;overflow:hidden;border:1px solid #000;"
+      ><span style="white-space: nowrap;display:inline-block;" class="slideInLeft animated_xxl infinite">开始kdjfkdjfkdjkfdjkfjdkfjdkfdkjfkj结束</span></div>
     </section>
   </article>
 </template>
@@ -101,6 +105,7 @@ export default {
     console.log('quickSort', this.quickSort([10, 5, 2, 4, 3, 654, 0]))
     console.log('getFibonacci', this.getFibonacci(15))
     window.addEventListener('deviceorientation', this.handleDeviceOrientation, true)
+
   },
   methods: {
     goBack: goBack,
@@ -301,5 +306,26 @@ export default {
   padding: 20px;
   margin: 10px auto;
   text-align: center;
+}
+.animated_xxl.infinite {
+  animation-iteration-count: infinite;
+}
+.animated_xxl {
+  animation-duration: 25s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(2rem, 0, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+.slideInLeft {
+  animation-name: slideInLeft;
 }
 </style>
