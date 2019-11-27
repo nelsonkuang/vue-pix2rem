@@ -6,6 +6,9 @@
     <section class="main">
       <ul>
         <li>
+          <router-link to="tree-demo-ii">Tree Demo II</router-link>
+        </li>
+        <li>
           <router-link to="render-tree-demo">渲染函数 Tree Demo</router-link>
         </li>
         <li>
