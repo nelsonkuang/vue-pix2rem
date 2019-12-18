@@ -49,6 +49,7 @@
           class="text"
           placeholder="请填写具体地址"
           required=""
+          @input="inputHandler()"
         ></textarea>
       </div>
     </li>
@@ -126,6 +127,11 @@ export default {
     }
   },
   methods: {
+    inputHandler () {
+      const str = this.addressInDetail
+      const length = str.split('\n').length
+      console.log(length)
+    },
     onProvChange (id) {
       if (id !== '0' && id !== 0) {
         this.cityArr = getAddressArrById(id)

@@ -101,13 +101,6 @@ export default {
       ]
     }
   },
-  computed: {
-  },
-  created () { },
-  mounted () {
-  },
-  beforeDestroy () {
-  },
   methods: {
     goBack: goBack
   },
