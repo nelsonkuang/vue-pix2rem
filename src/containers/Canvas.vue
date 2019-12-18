@@ -96,16 +96,25 @@ export default {
     ctx4.fillStyle = 'red'
     ctx4.fillRect(0, 0, 250, 100)
     // translate
-    m4 = this.translate(m4, [30, 10])
+    m4 = this.translate(m4, [30, 10]) // 平移 30 10
     ctx4.setTransform(m4[0], m4[1], m4[2], m4[3], m4[4], m4[5])
     ctx4.fillStyle = 'orange'
     ctx4.fillRect(0, 0, 250, 100)
     // rotate
-    m4 = this.rotate(m4, 30 * Math.PI / 180) // 旋转 60 度
+    m4 = this.rotate(m4, 30 * Math.PI / 180) // 旋转 30 度
     ctx4.setTransform(m4[0], m4[1], m4[2], m4[3], m4[4], m4[5])
     ctx4.fillStyle = 'yellow'
     ctx4.fillRect(0, 0, 250, 100)
-
+    // scale
+    m4 = this.scale(m4, [0.5, 0.5]) // 缩放 0.5 0.5
+    ctx4.setTransform(m4[0], m4[1], m4[2], m4[3], m4[4], m4[5])
+    ctx4.fillStyle = 'green'
+    ctx4.fillRect(0, 0, 250, 100)
+    // invert
+    m4 = this.invert(m4)
+    ctx4.setTransform(m4[0], m4[1], m4[2], m4[3], m4[4], m4[5])
+    ctx4.fillStyle = 'blue'
+    ctx4.fillRect(0, 0, 250, 100)
   },
   methods: {
     goBack: goBack,
@@ -159,13 +168,12 @@ export default {
     },
     translate (m, v) {
       let arr = [...m]
-      arr[4] = v[0]
-      arr[5] = v[1]
+      arr[4] = arr[4] + v[0]
+      arr[5] = arr[5] + v[1]
       return arr
     },
     rotate (m, rad) {
       /**
-       * 推导公式可自行百度
        * 假如 A（X, Y） 点初始角度为 a，绕圆点旋转 θ 度，在坐标系上可得 B 点的坐标（X', Y'），算出半径为 r = √(X² + Y²) 
        * X' = cos(a + θ) * r
        * Y' = sin(a + θ) * r
@@ -174,20 +182,55 @@ export default {
        * 根据三角函数公式：sin(α + β) = sinαcosβ + cosαsinβ
        * 可得 Y' = sinacosθ * r + cosasinθ * r =  X * sinθ + Y * cosθ
        * X’       cosθ    -sinθ   0       X
-
        * Y’   =   sinθ    cosθ    0   X   Y
-
        * 1         0       0      1       1
        * 根据结合律结果应为：
        * 
        * cosθ    -sinθ   0       m[0]  m[2]  m[4]      arr[0]  arr[2]  arr[4]
-
        * sinθ    cosθ    0   X   m[1]  m[3]  m[5]  =   arr[1]  arr[3]  arr[5]
-
        *  0       0      1       0      0      1         0       0        1
        * 
        */
       return this.mul([Math.cos(rad), Math.sin(rad), -1 * Math.sin(rad), Math.cos(rad), 0, 0], m)
+    },
+    scale (m, v) {
+      /** 
+       * 假如 X，Y 分别缩放（a, b）倍
+       * X' = X * a
+       * Y' = Y * b
+       * 
+       * a    0    0       m[0]  m[2]  m[4]      arr[0]  arr[2]  arr[4]
+       * 0    b    0   X   m[1]  m[3]  m[5]  =   arr[1]  arr[3]  arr[5]
+       * 0    0    1       0      0      1         0       0        1
+       * 
+       */
+      return this.mul([v[0], 0, 0, v[1], 0, 0], m)
+    },
+    invert (m) { // 矩阵求逆
+      /** 
+       * 待定系数法求逆
+       * X' = X * a
+       * Y' = Y * b
+       * 
+       * m[0]  m[2]  m[4]      arr[0]  arr[2]  arr[4]       1   0   0
+       * m[1]  m[3]  m[5]  *   arr[1]  arr[3]  arr[5]   =   0   1   0
+       * 0      0      1         0       0        1         0   0   1
+       * 
+       * m[0] * arr[0] + m[2] * arr[1] + m[4] * 0 = 1    =>  arr[0] = (1 - m[2] * arr[1]) / m[0]
+       * m[0] * arr[2] + m[2] * arr[3] + m[4] * 0 = 0        => arr[2] = (0 - m[2] * arr[3]) / m[0]
+       * m[0] * arr[4] + m[2] * arr[5] + m[4] * 1 = 0            => arr[4] = (0 - m[2] * arr[5] - m[4]) / m[0]
+       * m[1] * arr[0] + m[3] * arr[1] + m[5] * 0 = 0    =>  arr[0] = (0 - m[3] * arr[1]) / m[1]
+       * m[1] * arr[2] + m[3] * arr[3] + m[5] * 0 = 1        => arr[2] = (1 - m[3] * arr[3]) / m[1]
+       * m[1] * arr[4] + m[3] * arr[5] + m[5] * 1 = 0            => arr[4] = (0 - m[3] * arr[5] - m[5]) / m[1]
+       */
+      let arr = []
+      arr[1] = 1 / m[0] / (m[2] / m[0] - m[3] / m[1])
+      arr[0] = 0 - m[3] * arr[1] / m[1]
+      arr[3] = 1 / m[1] / (m[3] / m[1] - m[2] / m[0])
+      arr[2] = 0 - m[2] * arr[3] / m[0]
+      arr[5] = (m[4] / m[0] - m[5] / m[1]) / (m[3] / m[1] - m[2] / m[0])
+      arr[4] = 0 - m[3] * arr[5] - m[5] / m[1]
+      return arr
     }
   }
 }
